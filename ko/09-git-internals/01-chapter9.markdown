@@ -116,7 +116,7 @@ Git은 Content-addressable 파일시스템이다. 이게 무슨 말이냐 하면
 Git이 저장하는 데이터는 대강 그림 9-1과 같다.
 
 Insert 18333fig0901.png
-그림 9-1 단순화한 Git 데이터 모델
+그림 9-1. 단순화한 Git 데이터 모델
 
 직접 Tree 개체를 만들어 보자. Git은 일반적으로 Staging Area(Index)의 상태대로 Tree 개체를 만들고 기록한다. 그래서 Tree 개체를 만들려면 우선 Staging Area에 파일을 추가해서 Index를 만들어야 한다. 우선 Plumbing 명령어 `update-index`로 `test.txt` 파일만 들어 있는 Index를 만든다. 이 명령어는 파일을 인위적으로 Staging Area에 추가하는 명령다. 아직 Staging Area에 없는 파일이기 때문에 `--add` 옵션을 꼭 줘야 한다(사실 아직 Staging Area도 설정하지 않았다). 그리고 디렉토리에 있는 파일이 아니라 데이터베이스에 있는 파일을 추가하는 것이기 때문에 `--cacheinfo` 옵션이 필요하다. 파일 모드, SHA-1 해시, 파일 이름 정보도 입력한다:
 
@@ -164,7 +164,7 @@ Staging Area를 Tree 개체로 저장할 때는 `write-tree` 명령을 사용한
 이 Tree 개체로 워킹 디렉토리를 만들면 파일 두 개와 `bak`이라는 하위 디렉토리가 생긴다. 그리고 `bak` 디렉토리 안에는 test.txt 파일의 처음 버전이 들어 있다. 그림 9-2와 같은 구조로 데이터가 저장된다.
 
 Insert 18333fig0902.png
-그림 9-2 현재 Git 데이터 구조
+그림 9-2. 현재 Git 데이터 구조
 
 ### 커밋 개체 ###
 
@@ -241,7 +241,7 @@ Insert 18333fig0902.png
 내부의 포인터를 따라가면 그림 9-3과 같은 그래프가 그려진다.
 
 Insert 18333fig0903.png
-그림 9-3 Git 저장소 내의 모든 개체
+그림 9-3. Git 저장소 내의 모든 개체
 
 ### 개체 저장소 ###
 
@@ -326,7 +326,7 @@ Git 브랜치의 역할이 바로 이거다. 브랜치는 어떤 작업들 중 �
 이제 Git 데이터베이스는 그림 9-4처럼 보인다.
 
 Insert 18333fig0904.png
-그림 9-4 브랜치 레퍼런스가 추가된 Git 데이터베이스
+그림 9-4. 브랜치 레퍼런스가 추가된 Git 데이터베이스
 
 `git branch (branchname)` 명령을 실행하면 Git은 내부적으로 `update-ref` 명령을 실행한다. 입력받은 브랜치 이름과 현 브랜치의 마지막 커밋의 SHA-1 값을 가져다 `update-ref` 명령을 실행한다.
 
@@ -432,7 +432,7 @@ Linux Kernel 저장소에도 커밋이 아닌 다른 개체를 가리키는 태�
 
 Git은 zlib으로 파일 내용을 압축하기 때문에 저장 공간이 많이 필요하지 않다. 그래서 이 데이터베이스에 저장된 파일은 겨우 925바이트밖에 되지 않는다. 크기가 큰 파일을 추가해서 이 기능의 효과를 좀 더 살펴보자. 앞 장에서 사용했던 Grit 라이브러리에 들어 있는 repo.rb 파일을 추가한다. 이 파일의 크기는 약 12K이다.
 
-	$ curl http://github.com/mojombo/grit/raw/master/lib/grit/repo.rb > repo.rb
+	$ curl -L https://raw.github.com/mojombo/grit/master/lib/grit/repo.rb > repo.rb
 	$ git add repo.rb
 	$ git commit -m 'added repo.rb'
 	[master 484a592] added repo.rb
@@ -448,12 +448,12 @@ Git은 zlib으로 파일 내용을 압축하기 때문에 저장 공간이 많�
 	100644 blob 9bc1dc421dcd51b4ac296e3e5b6e2a99cf44391e      repo.rb
 	100644 blob e3f094f522629ae358806b17daf78246c27c007b      test.txt
 
-개체의 크기도 `git cat-file` 명령으로 확인할 수 있다:
+개체의 크기는 아래와 같이 확인한다:
 
-	$ git cat-file -s 9bc1dc421dcd51b4ac296e3e5b6e2a99cf44391e
-	12898
+	$ du -b .git/objects/9b/c1dc421dcd51b4ac296e3e5b6e2a99cf44391e
+	4102	.git/objects/9b/c1dc421dcd51b4ac296e3e5b6e2a99cf44391e
 
-피일을 수정하면 어떻게 되는지 살펴보자:
+파일을 수정하면 어떻게 되는지 살펴보자:
 
 	$ echo '# testing' >> repo.rb
 	$ git commit -am 'modified repo a bit'
@@ -469,10 +469,10 @@ Git은 zlib으로 파일 내용을 압축하기 때문에 저장 공간이 많�
 
 이 Blob 개체는 다른 개체다. 새 Blob 개체는 400줄 이후에 한 줄을 더 추가한 새 개체이다. Git은 완전히 새로운 Blob 개체를 만들어 저장한다:
 
-	$ git cat-file -s 05408d195263d853f09dca71d55116663690c27c
-	12908
+	$ du -b .git/objects/05/408d195263d853f09dca71d55116663690c27c
+	4109	.git/objects/05/408d195263d853f09dca71d55116663690c27c
 
-그럼 약 12K짜리 파일이 두 개나 생긴다. 거의 같은 파일이 두 개나 있는 것이 좀 못마땅하다. 처음 것과 두 번째 것 사이의 차이만 저장할 수 없을까?
+그럼 약 4K짜리 파일을 두 개 가지게 된다. 거의 같은 파일을 두 개나 가지게 되는 것이 못마땅할 수도 있다. 처음 것과 두 번째 것 사이의 차이점만 저장할 수 없을까?
 
 가능하다. Git이 처음 개체를 저장하는 형식은 Loose 개체 포멧이라고 부른다. 하지만 나중에 이 개체를 파일 하나로 압축(Pack)할 수 있다. 그래서 공간을 절약하고 효율을 높일 수 있다. Git이 이렇게 압축하는 때는 Loose 개체가 너무 많거나, `git gc` 명령을 실행했을 때, 그리고 리모트 서버로 Push할 때 압축한다. `git gc` 명령을 실행해서 어떻게 압축하는지 살펴보자:
 
@@ -494,7 +494,7 @@ Git은 zlib으로 파일 내용을 압축하기 때문에 저장 공간이 많�
 
 압축되지 않은 Blob 개체는 어떤 커밋도 가리키지 않는 개체다. 즉, "what is up, doc?"과 "test content" 예제에서 만들었던 개체이다. 어떤 커밋에도 추가돼 있지 않으면 이 개체는 `dangling` 개체로 취급되고 Packfile에 추가되지 않는다.
 
-새로 생긴 파일은 Packfile과 그 Index이다. 파일 시스템에서 삭제된 개체가 전부 이 Packfile에 저장된다. Index 파일은 빠르게 찾을 수 있도록 Packfile의 오프셋이 들어 있다. `git gc` 명령을 실행하기 전에 있던 파일 크기는 약 12K 정도였었는데 새로 만들어진 Packfile은 겨우 6K에 불과하다. 짱이다. 개체를 압축해서 디스크 사용량을 절반으로 줄였다.
+새로 생긴 파일은 Packfile과 그 Index이다. 파일 시스템에서 삭제된 개체가 전부 이 Packfile에 저장된다. Index 파일은 빠르게 찾을 수 있도록 Packfile의 오프셋이 들어 있다. `git gc` 명령을 실행하기 전에 있던 파일 크기는 약 8K 정도였었는데 새로 만들어진 Packfile은 겨우 4K에 불과하다. 짱이다. 개체를 압축하면 디스크 사용량은 절반으로 줄었다.
 
 어떻게 이런 일이 가능할까? 개체를 압축하면 Git은 먼저 이름이나 크기가 비슷한 파일을 찾는다. 그리고 두 파일을 비교해서 한 파일은 다른 부분만 저장한다. Git이 얼마나 공간을 절약해 주는지 Packfile을 열어 확인할 수 있다. `git verify-pack` 명령어는 압축한 내용을 보여준다:
 

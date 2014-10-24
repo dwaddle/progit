@@ -13,7 +13,7 @@
 중앙집중식 시스템에서는 보통 중앙집중식 협업 모델이라는 한 가지 방식밖에 없다. 중앙 저장소는 딱 하나 있고 변경 사항은 모두 이 중앙 저장소에 집중된다. 개발자는 이 중앙 저장소를 중심으로 작업한다(그림 5-1).
 
 Insert 18333fig0501.png
-그림 5-1 중앙집중식 Workflow
+그림 5-1. 중앙집중식 Workflow
 
 중앙집중식에서 개발자 두 명이 중앙저장소를 Clone하고 각자 수정하는 상황을 생각해보자. 한 개발자가 자신이 한 일을 커밋하고 나서 아무 문제 없이 서버에 Push한다. 그러면 다른 개발자는 자신의 일을 커밋하고 Push하기 전에 첫 번째 개발자가 한 일을 먼저 Merge해야 한다. Merge를 해야 첫 번째 개발자가 작업한 내용을 덮어쓰지 않는다. 이런 개념은 Subversion과 같은 중앙집중식 버전 관리 시스템에서 사용하는 방식이고 Git에서도 당연히 이런 Workflow를 사용할 수 있다.
 
@@ -23,15 +23,15 @@ Insert 18333fig0501.png
 
 Git을 사용하면 리모트 저장소를 여러 개 운영할 수 있다. 다른 개발자는 읽기만 가능하고 자신은 쓰기도 가능한 공개 저장소를 만드는 Workflow도 가능하다. 이 Worlflow에는 보통 프로젝트를 대표하는 하나의 공식 저장소가 있다. 기여자는 우선 공식 저장소를 하나 Clone하고 수정하고 나서 자신의 저장소에 Push한다. 그다음에 프로젝트 Integration-Manager에게 새 저장소에서 Pull하라고 요청한다. 그러면 그 Integration-Manager는 기여자의 저장소를 리모트 저장소로 등록하고, 로컬에서 기여물을 테스트하고, 프로젝트 메인 브랜치에 Merge하고, 그 내용을 다시 프로젝트 메인 저장소에 Push한다. 이런 과정은 아래와 같다(그림 5-2).
 
-1.    프로젝트 Integration-Manager는 프로젝트 메인 저장소에 Push를 한다.
-2.    프로젝트 기여자는 메인 저장소를 Clone하고 수정한다.
-3.    기여자는 자신의 저장소에 Push하고 Integration-Manager가 접근할 수 있도록 공개해 놓는다.
-4.    기여자는 Integration-Manager에게 E-mail 같은 것으로 변경사항을 적용해 달라고 요청한다.
-5.    Integration-Manager는 기여자의 저장소를 리모트 저장소로 등록하고 수정사항을 Merge하여 테스트한다.
-6.    Integration-Manager는 Merge한 사항을 메인 저장소에 Push한다.
+1. 프로젝트 Integration-Manager는 프로젝트 메인 저장소에 Push를 한다.
+2. 프로젝트 기여자는 메인 저장소를 Clone하고 수정한다.
+3. 기여자는 자신의 저장소에 Push하고 Integration-Manager가 접근할 수 있도록 공개해 놓는다.
+4. 기여자는 Integration-Manager에게 변경사항을 적용해 줄 것을 E-mail 같은 것으로 요청한다.
+5. Integration-Manager는 기여자의 저장소를 리모트 저장소로 등록하고 수정사항을 Merge하여 테스트한다.
+6. Integration-Manager는 Merge한 사항을 메인 저장소에 Push한다.
 
 Insert 18333fig0502.png
-그림 5-2 Integration-Manager Workflow
+그림 5-2. Integration-Manager Workflow
 
 이 방식은 GitHub 같은 사이트에서 주로 사용하는 방식이다. GitHub는 프로젝트를 Fork하고 수정사항을 반영하여 다시 모두에게 공개하기 좋은 구조로 되어 있다. 이 방식의 장점은 기여자와 Integration-Manager가 각자의 사정에 맞춰 프로젝트를 유지할 수 있다는 점이다. 기여자는 자신의 저장소와 브랜치에서 수정 작업을 계속해 나갈 수 있고 수정사항이 프로젝트에 반영되도록 기다릴 필요가 없다. 관리자는 여유를 가지고 기여자가 Push해 놓은 커밋을 적절한 시점에 Merge한다.
 
@@ -39,13 +39,13 @@ Insert 18333fig0502.png
 
 이 방식은 저장소를 여러개 운영하는 방식을 변형한 구조이다. 보통 수백 명의 개발자가 참여하는 아주 큰 프로젝트를 운영할 때 이 방식을 사용한다. 리눅스 커널 프로젝트가 대표적이다. 여러 명의 Integration-Manager가 저장소에서 자신이 맡은 부분만을 담당하는데 이들을 Lieutenants라고 부른다. 모든 Lieutenant는 최종 관리자 아래에 있으며 이 최종 관리자를 Dictator라고 부른다(그림 5-3).
 
-1.    개발자는 코드를 수정하고 master 브랜치를 기준으로 자신의 토픽 브랜치를 Rebase한다. 여기서 master 브랜치란 Dictator의 브랜치를 말한다.
-2.    Lieutenant들은 개발자들의 수정사항을 자신이 관리하는 master 브랜치에 Merge한다.
-3.    Dictator는 Lieutenant의 master 브랜치를 자신의 master 브랜치로 Merge한다.
-4.    Dictator는 Merge한 자신의 master 브랜치를 Push하여 다른 모든 개발자가 Rebase할 수 있는 기준으로 만든다.
+1. 개발자는 코드를 수정하고 master 브랜치를 기준으로 자신의 토픽 브랜치를 Rebase한다. 여기서 master 브랜치란 Dictator의 브랜치를 말한다.
+2. Lieutenant들은 개발자들의 수정사항을 자신이 관리하는 master 브랜치에 Merge한다.
+3. Dictator는 Lieutenant의 master 브랜치를 자신의 master 브랜치로 Merge한다.
+4. Dictator는 Merge한 자신의 master 브랜치를 Push하여 다른 모든 개발자가 Rebase할 수 있는 기준으로 만든다.
 
 Insert 18333fig0503.png
-그림 5-3 Benevolent dictator Workflow
+그림 5-3. Benevolent dictator Workflow
 
 이 방식이 일반적이지 않지만 깊은 계층 구조를 가지는 환경이나 규모가 큰 프로젝트에서는 매우 쓸모 있다. 프로젝트 리더가 모든 코드를 통합하기 전에 코드를 부분부분 통합하도록 여러 명의 Lieutenant에게 위임한다.
 
@@ -83,21 +83,21 @@ Insert 18333fig0503.png
 
 그리고 각 커밋은 논리적으로 구분되는 Changeset이다. 최대한 수정사항을 하나의 주제로 요약할 수 있어야 하고 여러 가지 이슈에 대한 수정사항을 하나의 커밋에 담지 않아야 한다. 여러 가지 이슈를 한꺼번에 수정했다고 하더라도 Staging Area을 이용하여 한 커밋에 하나의 이슈만 담기도록 한다. 작업 내용을 분할하고, 각 커밋마다 적절한 메시지를 작성한다. 같은 파일의 다른 부분을 수정하는 경우에는 `git add -patch` 명령을 써서 한 부분씩 나누어 Staging Area에 저장해야 한다(관련 내용은 *6장*에서 다룬다). 결과적으로 최종 프로젝트의 모습은 한 번에 커밋을 하든 다섯 번에 나누어 커밋을 하든 똑같다. 하지만, 여러 번 나누어 커밋하는 것이 좋다. 다른 동료가 수정한 부분을 확인할 때나 각 커밋의 시점으로 복원해서 검토할 때 이해하기 훨씬 쉽다. *6장*에서 이미 저장된 커밋을 다시 수정하거나 파일을 단계적으로 Staging Area에 저장하는 방법을 살펴본다. 다양한 도구를 이용해서 간단하고 이해하기 쉬운 커밋을 쌓아가야 한다.
 
-마지막으로 명심해야 할 점은 커밋 메시지 자체다. 좋은 커밋 메시지를 작성하는 습관은 Git을 사용하는 데 도움이 많이 된다. 일반적으로 커밋 메시지를  작성할 때 사용하는 규칙이 있다. 메시지의 첫 줄에 50자가 넘지 않는 아주 간략한 메시지를 적어 해당 커밋을 요약한다. 다음 한 줄은 비우고 그다음 줄부터 커밋을 자세히 설명한다. 예를 들어 Git 개발 프로젝트에서는 개발 동기와 구현 상황의 제약조건이나 상황 등을 자세하게 요구한다. 이런 점은 따를 만한 좋은 가이드라인이다. 그리고 현재형 표현을 사용하는 것이 좋다. 예를 들어 "I added tests for (테스트를 추가함)" 보다는 "Add tests for (테스트 추가)" 와 같은 메시지를 작성한다. 아래 예제는 Pope_at_tpope.net이 작성한 커밋 메시지이다.
+마지막으로 명심해야 할 점은 커밋 메시지 자체다. 좋은 커밋 메시지를 작성하는 습관은 Git을 사용하는 데 도움이 많이 된다. 일반적으로 커밋 메시지를 작성할 때 사용하는 규칙이 있다. 메시지의 첫 줄에 50자가 넘지 않는 아주 간략한 메시지를 적어 해당 커밋을 요약한다. 다음 한 줄은 비우고 그다음 줄부터 커밋을 자세히 설명한다. 예를 들어 Git 개발 프로젝트에서는 개발 동기와 구현 상황의 제약조건이나 상황 등을 자세하게 요구한다. 이런 점은 따를 만한 좋은 가이드라인이다. 그리고 현재형 표현을 사용하는 것이 좋다. 예를 들어 "I added tests for (테스트를 추가함)" 보다는 "Add tests for (테스트 추가)" 와 같은 메시지를 작성한다. 아래 예제는 Pope at tpope.net이 작성한 커밋 메시지이다.
 
-    영문 50글자 이하의 간략한 수정 요약
+	영문 50글자 이하의 간략한 수정 요약
 
-    자세한 설명. 영문 72글자 이상이 되면 줄 바꿈을 하고 이어지는 내용을
-    작성한다. 특정 상황에서는 첫 번째 줄이 이메일 메시지의 제목이 되고
-    나머지는 메일 내용이 된다. 간략하게 요약하고 넣는 빈 줄은 매우
-    중요하다. 자세한 설명이 있으면 꼭 넣는다.
+	자세한 설명. 영문 72글자 이상이 되면 줄 바꿈을 하고 이어지는 내용을
+	작성한다. 특정 상황에서는 첫 번째 줄이 이메일 메시지의 제목이 되고
+	나머지는 메일 내용이 된다. 간략하게 요약하고 넣는 빈 줄은 자세한
+	설명을 아예 쓰지 않는 한 매우 중요하다.
 
-    이어지는 내용도 한 줄 띄우고 쓴다.
+	이어지는 내용도 한 줄 띄우고 쓴다.
 
-     - 목록 표시도 사용할 수 있다.
+	 - 목록 표시도 사용할 수 있다.
 
-     - 보통 '-' 나 '*' 표시를 사용해서 목록을 표현하고 표시 앞에 공백
-       하나, 각 목록 사이에는 빈 줄을 하나를 넣는데 상황에 따라 다르다.
+	 - 보통 '-' 나 '*' 표시를 사용해서 목록을 표현하고 표시 앞에 공백
+	   하나, 각 목록 사이에는 빈 줄을 하나를 넣는데 상황에 따라 다르다.
 
 메시지를 이렇게 작성하면 함께 일하는 사람은 물론이고 자신에게도 매우 유용하다. Git 개발 프로젝트에는 잘 쓰인 커밋 메시지가 많으므로 프로젝트를 내려받아서 `git log --no-merges` 명령으로 꼭 살펴보기를 권한다.
 
@@ -157,7 +157,7 @@ Jessica씨의 Push는 성공했지만, John씨의 커밋은 서버에서 거절�
 Fetch하고 나면 John씨의 로컬 저장소는 그림 5-4와 같이 된다.
 
 Insert 18333fig0504.png
-그림 5-4 Fetch하고 난 John씨의 저장소
+그림 5-4. Fetch하고 난 John씨의 저장소
 
 John씨는 Jessica씨가 저장소로 Push했던 커밋과 를 로컬 저장소에 가져왔다. 하지만, Push하기 전에 Fetch한 브랜치를 Merge해야 한다:
 
@@ -169,7 +169,7 @@ John씨는 Jessica씨가 저장소로 Push했던 커밋과 를 로컬 저장소�
 Merge가 잘 이루어지면 John씨의 브랜치는 그림 5-5와 같은 상태가 된다.
 
 Insert 18333fig0505.png
-그림 5-5 origin/master 브랜치를 Merge하고 난 후, John씨의 저장소
+그림 5-5. `origin/master` 브랜치를 Merge하고 난 후, John씨의 저장소
 
 John씨는 Merge하고 나서 자신이 작업한 코드가 제대로 동작하는지 확인한다. 그 후에 공유하는 저장소에 Push한다:
 
@@ -181,12 +181,12 @@ John씨는 Merge하고 나서 자신이 작업한 코드가 제대로 동작하�
 이제 John씨의 저장소는 그림 5-6 처럼 되었다.
 
 Insert 18333fig0506.png
-그림 5-6 Push하고 난 후, John씨의 저장소
+그림 5-6. Push하고 난 후, John씨의 저장소
 
 동시에 Jessica씨는 토픽 브랜치를 하나 만든다. issue54 브랜치를 만들고 세 번에 걸쳐서 커밋한다. 아직 John씨의 커밋을 Fetch하지 않은 상황이기 때문에 그림 5-7과 같은 상황이 된다.
 
 Insert 18333fig0507.png
-그림 5-7 Jessica씨의 저장소
+그림 5-7. Jessica씨의 저장소
 
 Jessica씨는 John씨의 작업을 적용하려면 Fetch를 해야 한다:
 
@@ -199,7 +199,7 @@ Jessica씨는 John씨의 작업을 적용하려면 Fetch를 해야 한다:
 위 명령으로 John씨가 Push한 커밋을 모두 내려받는다. 그러면 Jessica씨의 저장소는 그림 5-8과 같은 상태가 된다.
 
 Insert 18333fig0508.png
-그림 5-8 John씨의 커밋을 Fetch한 후 Jessica씨의 저장소
+그림 5-8. John씨의 커밋을 Fetch한 후 Jessica씨의 저장소
 
 이제 orgin/master와 Merge할 차례다. Jessica씨는 토픽 브랜치 작업을 마치고 어떤 내용이 Merge되는지 `git log` 명령으로 확인한다:
 
@@ -210,13 +210,13 @@ Insert 18333fig0508.png
 
 	    removed invalid default value
 
-Merge할 내용을 확인한 Jessica씨는 자신이 작업한 내용과 John씨가 Push한 작업(origin/master)을 master 브랜치에 Merge하고 Push한다. 모든 내용을 합치기 전에 우선 master 브랜치를 Checkout한다:
+Merge할 내용을 확인한 Jessica씨는 자신이 작업한 내용과 John씨가 Push한 작업(`origin/master`)을 `master` 브랜치에 Merge하고 Push한다. 모든 내용을 합치기 전에 우선 `master` 브랜치를 Checkout한다:
 
 	$ git checkout master
 	Switched to branch "master"
 	Your branch is behind 'origin/master' by 2 commits, and can be fast-forwarded.
 
-origin/master, issue54 모두 master보다 Fast-forward된 브랜치이기 때문에 둘 중에 무엇을 먼저 Merge하든 상관이 없다. 물론 어떤 것을 먼저 Merge하느냐에 따라 히스토리 순서는 달라지지만, 최종 결과는 똑같다. Jessica씨는 먼저 issue54 브랜치를 Merge한다:
+`origin/master`, `issue54` 모두 `master`보다 Fast-forward된 브랜치이기 때문에 둘 중에 무엇을 먼저 Merge하든 상관이 없다. 물론 어떤 것을 먼저 Merge하느냐에 따라 히스토리 순서는 달라지지만, 최종 결과는 똑같다. Jessica씨는 먼저 `issue54` 브랜치를 Merge한다:
 
 	$ git merge issue54
 	Updating fbff5bc..4af4298
@@ -225,7 +225,7 @@ origin/master, issue54 모두 master보다 Fast-forward된 브랜치이기 때�
 	 lib/simplegit.rb |    6 +++++-
 	 2 files changed, 6 insertions(+), 1 deletions(-)
 
-보다시피 Fast-forward Merge이기 때문에 별 문제 없이 실행된다. 다음은 John씨의 커밋(origin/master)을 Merge한다:
+보다시피 Fast-forward Merge이기 때문에 별 문제 없이 실행된다. 다음은 John씨의 커밋(`origin/master`)을 Merge한다:
 
 	$ git merge origin/master
 	Auto-merging lib/simplegit.rb
@@ -236,9 +236,9 @@ origin/master, issue54 모두 master보다 Fast-forward된 브랜치이기 때�
 위와 같이 Merge가 잘 되면 그림 5-9와 같은 상태가 된다.
 
 Insert 18333fig0509.png
-그림 5-9 Merge 이후 Jessica씨의 저장소
+그림 5-9. Merge 이후 Jessica씨의 저장소
 
-origin/master 브랜치가 Jessica씨의 master 브랜치로 나아갈(reachable) 수 있기 때문에 Push는 성공한다(물론 John씨가 그 사이에 Push를 하지 않았다면):
+`origin/master` 브랜치가 Jessica씨의 `master` 브랜치로 나아갈(reachable) 수 있기 때문에 Push는 성공한다(물론 John씨가 그 사이에 Push를 하지 않았다면):
 
 	$ git push origin master
 	...
@@ -248,12 +248,12 @@ origin/master 브랜치가 Jessica씨의 master 브랜치로 나아갈(reachable
 두 개발자의 커밋과 Merge가 성공적으로 이루어지고 난 후의 결과는 5-10과 같다.
 
 Insert 18333fig0510.png
-그림 5-10 Jessica씨가 서버로 Push하고 난 후의 저장소
+그림 5-10. Jessica씨가 서버로 Push하고 난 후의 저장소
 
-여기서 살펴본 예제가 가장 간단한 상황이다. 토픽 브랜치에서 수정하고 로컬의 master 브랜치에 Merge한다. 작업한 내용을 프로젝트의 공유 저장소에 Push하고자 할 때에는 우선 origin/master 브랜치를 Fetch하고 Merge한다. 그리고 나서 Merge한 결과를 다시 서버로 Push한다. 이런 Workflow가 일반적이고 그림 5-11로 나타낼 수 있다.
+여기서 살펴본 예제가 가장 간단한 상황이다. 토픽 브랜치에서 수정하고 로컬의 `master` 브랜치에 Merge한다. 작업한 내용을 프로젝트의 공유 저장소에 Push하고자 할 때에는 우선 `origin/master` 브랜치를 Fetch하고 Merge한다. 그리고 나서 Merge한 결과를 다시 서버로 Push한다. 이런 Workflow가 일반적이고 그림 5-11로 나타낼 수 있다.
 
 Insert 18333fig0511.png
-그림 5-11 여러 개발자가 Git을 사용하는 Workflow
+그림 5-11. 여러 개발자가 Git을 사용하는 Workflow
 
 ### 비공개 대규모 팀 ###
 
@@ -299,7 +299,7 @@ Jessica씨는 자신이 한 일을 featureA라는 브랜치로 Push했다는 이
 그럼 Jessica씨의 저장소는 그림 5-12과 같다.
 
 Insert 18333fig0512.png
-그림 5-12 Jessica씨의 저장소
+그림 5-12. Jessica씨의 저장소
 
 작업을 마치고 Push하려고 하는데 Jesie씨가 이미 일부 작업을 하고 서버에 featureBee 브랜치로 Push했다는 이메일을 보내왔다. Jessica씨는 Jesie씨의 작업을 먼저 Merge해야만 Push할 수 있다. Merge하기 위해서 우선 `git fetch`로 Fetch한다:
 
@@ -354,27 +354,27 @@ John씨가 몇 가지 작업을 하고 나서 featureA에 Push했고 확인해 �
 Jessica씨는 일부 수정하고, 수정한 내용을 다시 서버로 Push한다:
 
 	$ git commit -am 'small tweak'
-	[featureA ed774b3] small tweak
+	[featureA 774b3ed] small tweak
 	 1 files changed, 1 insertions(+), 1 deletions(-)
 	$ git push origin featureA
 	...
 	To jessica@githost:simplegit.git
-	   3300904..ed774b3  featureA -> featureA
+	   3300904..774b3ed  featureA -> featureA
 
 위와 같은 작업을 마치고 나면 Jessica씨의 저장소는 그림 5-13과 같은 모습이 된다.
 
 Insert 18333fig0513.png
-그림 5-13 마지막 Push하고 난 후의 Jessica씨의 저장소
+그림 5-13. 마지막 Push하고 난 후의 Jessica씨의 저장소
 
 그럼 featureA와 featureBee 브랜치가 프로젝트의 메인 브랜치로 Merge할 준비가 되었다고 Integration-Manager에게 알려준다. Integration-Manager가 두 브랜치를 모두 Merge하고 난 후에 메인 브랜치를 Fetch하면 그림 5-14와 같은 모양이 된다.
 
 Insert 18333fig0514.png
-그림 5-14 두 브랜치가 메인 브랜치에 Merge된 후의 저장소
+그림 5-14. 두 브랜치가 메인 브랜치에 Merge된 후의 저장소
 
 수많은 팀의 작업을 동시에 진행하고 나중에 Merge하는 기능을 사용하려고 다른 버전 관리 시스템에서 Git으로 바꾸는 조직들이 많아지고 있다. 팀은 자신의 브랜치로 작업하지만, 메인 브랜치에 영향을 끼치지 않는다는 점이 Git의 장점이다. 그림 5-15는 이런 Workflow을 나타내고 있다.
 
 Insert 18333fig0515.png
-그림 5-15 대규모 팀의 Workflow
+그림 5-15. 대규모 팀의 Workflow
 
 ### 공개 소규모 팀 ###
 
@@ -434,7 +434,7 @@ request-pull 명령은 아규먼트를 두 개 입력받는다. 첫 번째 아�
 그림 5-16 처럼 각 토픽은 일종의 실험실이라고 할 수 있다. 각 토픽은 서로 방해하지 않고 독립적으로 수정하고 Rebase할 수 있다:
 
 Insert 18333fig0516.png
-그림 5-16 featureB 수정작업이 끝난 직후 저장소의 모습
+그림 5-16. featureB 수정작업이 끝난 직후 저장소의 모습
 
 프로젝트 관리자가 사람들의 수정사항을 Merge하고 나서 Jessica씨의 브랜치를 Merge하려고 할 때 충돌이 날 수도 있다. 그러면 Jessica씨가 자신의 브랜치를 origin/master에 Rebase해서 충돌을 해결하고 다시 Pull Request을 보낸다:
 
@@ -445,7 +445,7 @@ Insert 18333fig0516.png
 위 명령들을 실행하고 나면 그림 5-17과 같아진다.
 
 Insert 18333fig0517.png
-그림 5-17 FeatureA에 대한 Rebase가 적용된 후의 모습
+그림 5-17. FeatureA에 대한 Rebase가 적용된 후의 모습
 
 브랜치를 Rebase해 버렸기 때문에 Push할 때 -f 옵션을 주고 강제로 기존에 서버에 있던 브랜치의 내용을 덮어 써야 한다. 아니면 새로운 브랜치를(예를 들어 featureAv2) 서버에 Push해도 된다.
 
@@ -462,11 +462,11 @@ Insert 18333fig0517.png
 수정을 마치면 관리자에게 featureBv2 브랜치를 확인해 보라고 메시지를 보낸다 (그림 5-18 참고).
 
 Insert 18333fig0518.png
-그림 5-18 featureBv2 브랜치를 커밋한 이후 저장소 모습
+그림 5-18. featureBv2 브랜치를 커밋한 이후 저장소 모습
 
 ### 대규모 공개 프로젝트 ###
 
-대규모 프로젝트은 보통 수정사항이나 Patch를 수용하는 자신만의 규칙을 마련해놓고 있다. 프로젝트마다 규칙은 서로 다를 수 있으므로 각 프로젝트의 규칙을 미리 알아둘 필요가 있다. 대규모 프로젝트는 대부분 메일링리스트를 통해서 Patch를 받아들이는데 예제를 통해 살펴본다.
+대규모 프로젝트는 보통 수정사항이나 Patch를 수용하는 자신만의 규칙을 마련해놓고 있다. 프로젝트마다 규칙은 서로 다를 수 있으므로 각 프로젝트의 규칙을 미리 알아둘 필요가 있다. 대규모 프로젝트는 대부분 메일링리스트를 통해서 Patch를 받아들이는데 예제를 통해 살펴본다.
 
 토픽 브랜치를 만들어 수정하는 작업은 앞서 살펴본 바와 거의 비슷하지만, Patch를 제출하는 방식이 다르다. 프로젝트를 Fork 하여 Push하는 것이 아니라 커밋 내용을 메일로 만들어 개발자 메일링리스트에 제출한다:
 
@@ -512,13 +512,13 @@ format-patch 명령을 실행하면 생성한 파일 이름을 보여준다. -M 
 	--
 	1.6.2.rc1.20.g8c5b.dirty
 
-메일링리스트에 메일을 보내기 전에 각 Patch 메일 파일의 내용을 손으로 고칠 수 있다. -- 줄과 Patch가 시작되는 줄(lib/simplegit.rb로 시작하는 줄) 사이에 내용을 추가하면 개발자는 읽을 수 있지만, 나중에 Patch에 적용되지는 않는다.
+메일링리스트에 메일을 보내기 전에 각 Patch 메일 파일의 내용을 손으로 고칠 수 있다. `---` 줄과 Patch가 시작되는 줄(`lib/simplegit.rb`로 시작하는 줄) 사이에 내용을 추가하면 개발자는 읽을 수 있지만, 나중에 Patch에 적용되지는 않는다.
 
 특정 메일 프로그램을 사용하거나 이메일을 보내는 명령어로 메일링리스트에 보낼 수 있다. 붙여 넣기로 위의 내용이 그대로 들어가지 않는 메일 프로그램도 있다. 사용자 편의를 위해 공백이나 줄 바꿈 문자 등을 넣어 주는 메일 프로그램은 원본 그대로 들어가지 않는다.
 
-다행히 Git에는 Patch 메일을 그대로 보낼 수 있는 도구가 있다. IMAP 프로토콜로 보낸다. 저자가 사용하는 방법으로 Gmail을 사용하여 Patch 메일을 전송하는 방법을 살펴보자. 추가로 Git 프로젝트의 `Docuementation/SubmittingPatches` 문서의 마지막 부분을 살펴보면 다양한 메일 프로그램으로 메일을 보내는 방법을 설명한다.
+다행히 Git에는 Patch 메일을 그대로 보낼 수 있는 도구가 있다. IMAP 프로토콜로 보낸다. 저자가 사용하는 방법으로 Gmail을 사용하여 Patch 메일을 전송하는 방법을 살펴보자. 추가로 Git 프로젝트의 `Documentation/SubmittingPatches` 문서의 마지막 부분을 살펴보면 다양한 메일 프로그램으로 메일을 보내는 방법을 설명한다.
 
-메일을 보내려면 먼저 ~/.gitconfig 파일에서 이메일 부분 설정한다. `git config` 명령으로 추가할 수도 있고 직접 파일을 열어서 추가할 수도 있다. 아무튼, 아래와 같이 설정을 한다:
+메일을 보내려면 먼저 `~/.gitconfig` 파일에서 이메일 부분 설정한다. `git config` 명령으로 추가할 수도 있고 직접 파일을 열어서 추가할 수도 있다. 아무튼, 아래와 같이 설정을 한다:
 
 	[imap]
 	  folder = "[Gmail]/Drafts"
@@ -528,7 +528,26 @@ format-patch 명령을 실행하면 생성한 파일 이름을 보여준다. -M 
 	  port = 993
 	  sslverify = false
 
-IMAP 서버가 SSL을 사용하지 않으면 마지막 두 줄은 필요 없고 host에서 `imaps://` 대신 `imap://`로 한다. 이렇게 설정하면 `git send-email` 명령으로 메일을 전송할 수 있다:
+IMAP 서버가 SSL을 사용하지 않으면 마지막 두 줄은 필요 없고 host에서 `imaps://` 대신 `imap://`로 한다. 이렇게 설정하면 `git imap-send` 명령으로 메일을 전송할 수 있다:
+
+	$ cat *.patch |git imap-send
+	Resolving imap.gmail.com... ok
+	Connecting to [74.125.142.109]:993... ok
+	Logging in...
+	sending 2 messages
+	100% (2/2) done
+
+이후 Gmail의 Draft 폴더로 가서 To 부분을 메일링리스트의 주소로 변경하고 CC 부분에 해당 메일을 참고해야 하는 관리자나 개발자의 메일 주소를 적고 실제로 전송한다.
+
+SMTP 서버로도 패치를 보낼 수 있다. `git config` 명령으로 설정을 하나씩 입력하거나 `~/.gitconfig` 파일의 sendmail 부분을 손으로 직접 수정한다:
+
+	[sendemail]
+	  smtpencryption = tls
+	  smtpserver = smtp.gmail.com
+	  smtpuser = user@gmail.com
+	  smtpserverport = 587
+
+이렇게 했으면 `git send-mail`로 패치를 보낸다:
 
 	$ git send-email *.patch
 	0001-added-limit-to-log-function.patch
@@ -555,8 +574,6 @@ Git으로 메일을 보내면 아래와 같은 로그 메시지가 출력된다:
 
 	Result: OK
 
-이후 Gmail의 Draft 폴더로 가서 To 부분을 메일링리스트의 주소로 변경하고 CC 부분에 해당 메일을 참고해야 하는 관리자나 개발자의 메일 주소를 적고 실제로 전송한다.
-
 ### 요약 ###
 
 이번 절에서는 다양한 Workflow에 따라 Git을 어떻게 사용하는 지 살펴보고 그에 필요한 도구들을 설명했다. 다음 절에서는 동전의 뒷면인 프로젝트를 운영하는 방법에 대하여 살펴본다. 즉 친절한 Dictator나 Integration-Manager가 되어 보는 것이다.
@@ -571,7 +588,7 @@ Git으로 메일을 보내면 아래와 같은 로그 메시지가 출력된다:
 
 	$ git branch sc/ruby_client master
 
-`checkout -b` 옵션으로 브랜치를 만들고 Checkout까지 한 번에 할 수 있다:
+`checkout -b` 명령으로 브랜치를 만들고 Checkout까지 한 번에 할 수 있다:
 
 	$ git checkout -b sc/ruby_client master
 
@@ -755,23 +772,23 @@ master 브랜치가 가리키는 커밋이 토픽 브랜치의 조상이라면 �
 바로 master 브랜치에 Merge하는 것이 가장 간단하다. 이 Workflow에서는 master 브랜치가 안전한 코드라고 가정한다. 토픽 브랜치를 검증하고 master 브랜치로 Merge할 때마다 토픽 브랜치를 삭제한다. 그림 5-19처럼 `ruby_client` 브랜치와 `php_client` 브랜치가 있을 때 `ruby_client` 브랜치를 master 브랜치로 Merge한 후 `php_client` 브랜치를 Merge하면 그림 5-20과 같아진다:
 
 Insert 18333fig0519.png
-그림 5-19 저장소의 두 브랜치
+그림 5-19. 저장소의 두 브랜치
 
 Insert 18333fig0520.png
-그림 5-20 Merge한 후의 저장소
+그림 5-20. Merge한 후의 저장소
 
 이 Workflow은 간단하지만, 프로젝트의 규모가 커지면 문제가 생길 수 있다.
 
 개발자가 많고 규모가 큰 프로젝트에서는 두 단계로 Merge하는 것이 좋다. 그래서 Long-Running 브랜치를 두 개로 유지해야 한다. master 브랜치는 아주 안정적인 버전을 릴리즈하기 위해서 사용한다. develop 브랜치는 새로 수정된 코드를 통합할 때 사용한다. 그리고 두 브랜치를 모두 저장소에 Push한다. 우선 develop 브랜치에 토픽 브랜치(그림 5-21)를 그림 5-22과 같이 Merge한다. 그 후에 릴리즈해도 될만한 수준이 되면 master 브랜치를 develop 브랜치까지 Fast-forward시킨다(그림 5-23).
 
 Insert 18333fig0521.png
-그림 5-21 토픽 브랜치를 Merge하기 전
+그림 5-21. 토픽 브랜치를 Merge하기 전
 
 Insert 18333fig0522.png
-그림 5-22 토픽 브랜치를 Merge한 후
+그림 5-22. 토픽 브랜치를 Merge한 후
 
 Insert 18333fig0523.png
-그림 5-23 토픽 브랜치를 릴리즈한 후
+그림 5-23. 토픽 브랜치를 릴리즈한 후
 
 이 Workflow을 사용하면 프로젝트 저장소를 Clone하고 나서 개발자가 안정 버전이 필요하면 master 브랜치를 빌드하고 안정적이지 않더라도 좀 더 최신 버전이 필요하면 develop 브랜치를 Checkout하여 빌드한다. 이 개념을 좀 더 확장해서 사용할 수 있다. 토픽 브랜치를 검증하기 위한 integrate 브랜치를 만들어 Merge하고 토픽 브랜치가 검증되면 develop 브랜치에 머지한다. 그리고 develop 브랜치에서 충분히 안정하다는 것이 증명되면 그때 master 브랜치에 Merge한다.
 
@@ -780,12 +797,12 @@ Insert 18333fig0523.png
 Git을 개발하는 프로젝트는 Long-Running의 브랜치를 4개 운영한다. 각 브랜치 이름은 master, next, pu (Proposed Updates), maint 이다. maint는 마지막으로 릴리즈한 버전을 지원하는 브랜치다. 기여자가 새로운 기능을 제안하면 관리자는 그림 5-24처럼 자신의 저장소에 토픽 브랜치를 만들어 관리한다. 그리고 토픽에 부족한 점은 없는지, 안정적인지 계속 테스트한다. 안정화되면 next로 Merge하고 저장소에 Push한다. 그러면 모두가 잘 통합됐는지 확인할 수 있다.
 
 Insert 18333fig0524.png
-그림 5-24 토픽 브랜치를 동시에 여러 개 관리하는 것은 복잡하다
+그림 5-24. 토픽 브랜치를 동시에 여러 개 관리하는 것은 복잡하다
 
 토픽 브랜치가 좀 더 개선돼야 하면 next가 아니라 pu에 Merge한다. 그 후에 충분히 검증을 마치면 pu에서 next로 옮기고 next를 기반으로 pu를 다시 만든다. next에는 아직 master에 넣기에 모자라 보이는 것들이 들어 있다. 즉 next 브랜치는 정말 가끔 Rebase하고 pu는 자주 Rebase하지만 master는 항상 Fast-forward한다(그림 5-25).
 
 Insert 18333fig0525.png
-그림 5-25 토픽 브랜치를 Long-Running 브랜치로 Merge하기
+그림 5-25. 토픽 브랜치를 Long-Running 브랜치로 Merge하기
 
 토픽 브랜치가 결국 master 브랜치로 Merge되면 저장소에서 삭제한다. 그리고 이전 릴리즈 버전에 Patch가 필요하면 maint 브랜치를 이용해 대응한다. Git을 개발하는 프로젝트를 Clone하면 브랜치가 4개 있고 각 브랜치를 이용하여 진행사항을 확인해볼 수 있다. 그래서 새로운 기능을 추가하려면 적당한 브랜치를 보고 고른다. 이 Workflow는 잘 구조화돼 있어서 코드가 새로 추가돼도 테스트하기 쉽다.
 
@@ -796,7 +813,7 @@ Insert 18333fig0525.png
 한 브랜치에서 다른 브랜치로 작업한 내용을 옮기는 또 다른 방식으로 Cherry-pick이란 것도 있다. Git의 Cherry-pick은 커밋 하나만 Rebase하는 것이다. 커밋 하나로 Patch 내용을 만들어 현재 브랜치에 적용을 하는 것이다. 토픽 브랜치에 있는 커밋중에서 하나만 고르거나 토픽 브랜치에 커밋이 하나밖에 없을 때 Rebase보다 유용하다. 그림 5-26의 예를 들어보자.
 
 Insert 18333fig0526.png
-그림 5-26 Cherry-pick을 실행하기 전의 저장소
+그림 5-26. Cherry-pick을 실행하기 전의 저장소
 
 e43a6 커밋 하나만 현재 브랜치에 적용하려면 아래와 같은 명령을 실행한다:
 
@@ -808,7 +825,7 @@ e43a6 커밋 하나만 현재 브랜치에 적용하려면 아래와 같은 명�
 위 명령을 실행하면 e43a6 커밋에서 변경된 내용을 현재 브랜치에 똑같이 적용을 한다. 하지만, 변경을 적용한 시점이 다르므로 새 커밋의 SHA-1 해시 값은 달라진다. 명령을 실행하고 나면 그림 5-27과 같이 될 것이다.
 
 Insert 18333fig0527.png
-그림 5-27 Cherry-pick 방식으로 커밋 하나를 적용한 후의 저장소
+그림 5-27. Cherry-pick 방식으로 커밋 하나를 적용한 후의 저장소
 
 Rebase나 Cherry-pick 방식으로 토픽 브랜치를 합치고 나면 필요없는 토픽 브랜치나 커밋은 삭제한다.
 

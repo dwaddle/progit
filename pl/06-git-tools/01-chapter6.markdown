@@ -90,7 +90,7 @@ Jeżeli zdarzy Ci się zapisać obiekt który ma sumę kontrolną SHA-1 taką sa
 
 Powinieneś wiedzieć jednak, że taki scenariusz jest strasznie rzadki. Skrót SHA-1 ma długość 20 bajtów lub 160 bitów. Ilość losowych obiektów potrzebnych do zapewnienia 50% prawdopodobieństwa kolizji to około 2^80 (wzór na obliczenie prawdopodobieństwa kolizji to `p = (n(n-1)/2) * (1/2^160)`). 2^80 to 1.2 x 10^24 lub 1 milion miliardów miliardów. Jest to około 1200 razy ilość ziarenek piasku na kuli ziemskiej.
 
-<!--However, you should be aware of how ridiculously unlikely this scenario is. The SHA-1 digest is 20 bytes or 160 bits. The number of randomly hashed objects needed to ensure a 50% probability of a single collision is about 2^80 (the formula for determining collision probability is `p = (n(n-1)/2) * (1/2^160))`. 2^80 is 1.2 x 10^24 or 1 million billion billion. That’s 1,200 times the number of grains of sand on the earth. -->
+<!--However, you should be aware of how ridiculously unlikely this scenario is. The SHA-1 digest is 20 bytes or 160 bits. The number of randomly hashed objects needed to ensure a 50% probability of a single collision is about 2^80 (the formula for determining collision probability is `p = (n(n-1)/2) * (1/2^160)`). 2^80 is 1.2 x 10^24 or 1 million billion billion. That’s 1,200 times the number of grains of sand on the earth. -->
 
 Weźmy przykład, aby zaprezentować Ci jak trudne jest wygenerowanie kolizji SHA-1. Jeżeli wszyscy z 6,5 miliarda osób na ziemi byłaby programistami i w każdej sekundzie, każdy z nich tworzyłby kod wielkości całego jądra Linuksa (1 milion obiektów Gita) i wgrywał go do ogromnego repozytorium Gita, zajęłoby około 5 lat, zanim w repozytorium byłoby tyle obiektów, aby mieć pewność 50% wystąpienia kolizji. Istnieje większe prawdopodobieństwo, że każdy z członków Twojego zespołu programistycznego zostanie zaatakowany i zabity przez wilki, w nie związanych ze sobą zdarzeniach, w ciągu tej samej nocy. 
 
@@ -269,7 +269,7 @@ Najczęściej używaną składnią wskazywania zakresu zmian jest podwójna krop
 <!-- The most common range specification is the double-dot syntax. This basically asks Git to resolve a range of commits that are reachable from one commit but aren’t reachable from another. For example, say you have a commit history that looks like Figure 6-1. -->
 
 Insert 18333fig0601.png
-Figure 6-1. Przykładowa historia dla wskazania zakresu zmian.
+Rysunek 6-1. Przykładowa historia dla wskazania zakresu zmian.
 
 <!-- Figure 6-1. Example history for range selection. -->
 
@@ -602,7 +602,7 @@ Twój katalog roboczy jest teraz w stanie niezmienionym:
 
 	$ git status
 	# On branch master
-	nothing to commit (working directory clean)
+	nothing to commit, working directory clean
 
 W tej chwili, możesz bez problemu przejść na inną gałąź i rozpocząć pracę nad innymi zmianami; Twoje poprzednie modyfikacje zapisane są w przechowalni. Aby zobaczyć listę zapisanych zmian w przechowalni, użyj komendy `git stash list`: 
 
@@ -683,7 +683,7 @@ Możesz chcieć stworzyć alias i dodać komendę `stash-unapply` do Gita. Na pr
 <!-- You may want to create an alias and effectively add a `stash-unapply` command to your git. For example: -->
 
     $ git config --global alias.stash-unapply '!git stash show -p | git apply -R'
-    $ git stash
+    $ git stash apply
     $ #... work work work
     $ git stash-unapply
 
@@ -968,7 +968,7 @@ To często występująca sytuacja. Ktoś niechcący zapisać duży plik za pomoc
 	Rewrite 6b9b3cf04e7c5686a9cb838c3f36a8cb6a0fc2bd (21/21)
 	Ref 'refs/heads/master' was rewritten
 
-Opcja `--tree-filter` umożliwia wykonanie jakiejś komendy po każdej zmianie i następnie ponownie zapisuje wynik. W tym przypadku, usuwasz plik passwords.txt z każdej migawki, bez względu na to czy on istnieje czy nie. Jeżeli chcesz usunąć wszystkie niechcący dodane kopie zapasowe plików stworzone przez edytor, możesz uruchomić coś podobnego do `git filter-branch --tree-filter "rm -f *~" HEAD`.
+Opcja `--tree-filter` umożliwia wykonanie jakiejś komendy po każdej zmianie i następnie ponownie zapisuje wynik. W tym przypadku, usuwasz plik passwords.txt z każdej migawki, bez względu na to czy on istnieje czy nie. Jeżeli chcesz usunąć wszystkie niechcący dodane kopie zapasowe plików stworzone przez edytor, możesz uruchomić coś podobnego do `git filter-branch --tree-filter "find * -type f -name '*~' -delete" HEAD`.
 
 <!-- The `-\-tree-filter` option runs the specified command after each checkout of the project and then recommits the results. In this case, you remove a file called passwords.txt from every snapshot, whether it exists or not. If you want to remove all accidentally committed editor backup files, you can run something like `git filter-branch -\-tree-filter "rm -f *~" HEAD`. -->
 
@@ -1096,7 +1096,7 @@ Git zobaczył, że 12 zmian było wprowadzonych między commitem który uznałe�
 	Bisecting: 3 revisions left to test after this
 	[b047b02ea83310a70fd603dc8cd7a6cd13d15c04] secure this thing
 
-Teraz jest na innym commicie, w połowie drogi między tym który właśnie przetestowałeś, a tym oznaczonym jako zły. Uruchamiasz swój test ponownie i widisz, że obecna wersja zawiera błąd, więc wskazujesz to Gitowi za pomocą `git bisect bad`:
+Teraz jest na innym commicie, w połowie drogi między tym który właśnie przetestowałeś, a tym oznaczonym jako zły. Uruchamiasz swój test ponownie i widzisz, że obecna wersja zawiera błąd, więc wskazujesz to Gitowi za pomocą `git bisect bad`:
 
 <!-- Now you’re on another commit, halfway between the one you just tested and your bad commit. You run your test again and find that this commit is broken, so you tell Git that with `git bisect bad`: -->
 
@@ -1330,7 +1330,7 @@ Dzieje się tak dlatego, ponieważ wskaźnik który masz dla modułu zależnego,
 	   08d709f..6c5e70b  master     -> origin/master
 	Submodule path 'rack': checked out '6c5e70b984a60b3cecd395edd5b48a7575bf58e0'
 
-Musisz wykonywać tą komendę, za każdym razem gdy ściągniesz zmiany z modułu do swojego projektu. Trochę to dziwne, ale działa.
+Musisz wykonywać tę komendę, za każdym razem gdy ściągniesz zmiany z modułu do swojego projektu. Trochę to dziwne, ale działa.
 
 <!-- You have to do this every time you pull down a submodule change in the main project. It’s strange, but it works. -->
 

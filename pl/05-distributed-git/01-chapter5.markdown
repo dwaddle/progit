@@ -19,7 +19,7 @@ W scentralizowanych systemach, zazwyczaj jest stosowany model centralnego przep�
 <!-- In centralized systems, there is generally a single collaboration model—the centralized workflow. One central hub, or repository, can accept code, and everyone synchronizes their work to it. A number of developers are nodes — consumers of that hub — and synchronize to that one place (see Figure 5-1). -->
 
 Insert 18333fig0501.png
-Figure 5-1. Scentralizowany przepływ pracy.
+Rysunek 5-1. Scentralizowany przepływ pracy.
 
 Oznacza to tyle, że w sytuacji w której dwóch niezależnych programistów korzystających z tego centralnego repozytorium będzie próbowało wgrać swoje zmiany, tylko pierwszemu z nich uda się tego dokonać bezproblemowo. Drugi przed wgraniem, będzie musiał najpierw pobrać i zintegrować zmiany wprowadzone przez pierwszego programistę, a dopiero później ponowić próbę wysłania swoich na serwer. Taki rodzaj współpracy sprawdza się doskonale w Gitcie, tak samo jak funkcjonuje on w Subversion (lub każdym innym CVCS).
 
@@ -52,7 +52,7 @@ Ponieważ Git powala na posiadanie wielu zdalnych repozytoriów, możliwy jest s
 -->
 
 Insert 18333fig0502.png
-Figure 5-2. Przepływ pracy z osobą integrującą zmiany.
+Rysunek 5-2. Przepływ pracy z osobą integrującą zmiany.
 
 To jest bardzo popularne podejście podczas współpracy przy pomocy stron takich jak GitHub, gdzie bardzo łatwo można stworzyć kopię repozytorium i wgrywać zmiany do niego aby każdy mógł je zobaczyć. jedną z głównych zalet takiego podejścia jest to, że możesz kontynuować pracę, a opiekun może pobrać Twoje zmiany w dowolnym czasie. Programiści nie muszą czekać na opiekuna, aż ten włączy ich zmiany, każdy z nich może pracować oddzielnie.
 
@@ -78,7 +78,7 @@ To jest wariant przepływu z wieloma repozytoriami. Zazwyczaj jest on używany w
 -->
 
 Insert 18333fig0503.png
-Figure 5-3. Przepływ pracy z miłościwym dyktatorem.
+Rysunek 5-3. Przepływ pracy z miłościwym dyktatorem.
 
 Ten rodzaj współpracy nie jest częsty w użyciu, ale może być użyteczny w bardzo dużych projektach, lub bardzo rozbudowanych strukturach zespołów w których lider zespołu może delegować większość pracy do innych i zbierać duże zestawy zmian przed integracją.
 
@@ -133,7 +133,7 @@ Po pierwsze, nie chcesz wgrywać żadnych błędów związanych z poprawkami pus
     +    def command(git_cmd)XXXX
 
 
-Jeżeli uruchomisz tą komendę przed commit-em, dowiesz się czy zamierzasz wgrać zmiany które mogą zdenerwować innych programistów.
+Jeżeli uruchomisz tę komendę przed commit-em, dowiesz się czy zamierzasz wgrać zmiany które mogą zdenerwować innych programistów.
 
 <!-- If you run that command before committing, you can tell if you’re about to commit whitespace issues that may annoy other developers. -->
 
@@ -152,15 +152,15 @@ Here is a template originally written by Tim Pope at tpope.net: -->
     Bardziej szczegółowy tekst jeżeli jest taka konieczność. Zawijaj
     wiersze po około 72 znakach. Czasami pierwsza linia jest traktowana
     jako temat wiadomości email, a reszta komentarza jako treść. Pusta
-    linia oddzielająca opis od streszczenia jest konieczna (chyba że 
+    linia oddzielająca opis od streszczenia jest konieczna (chyba że
     ominiesz szczegółowy opis kompletnie); narzędzia takie jak `rebase`
     mogą się pogubić jeżeli nie oddzielisz ich.
 
     Kolejne paragrafy przychodzą po pustej linii.
 
-     - wypunktowania są poprawne, również 
+     - wypunktowania są poprawne, również
 
-     - zazwyczaj łącznik lub gwiazdka jest używana do punktowania, 
+     - zazwyczaj łącznik lub gwiazdka jest używana do punktowania,
        poprzedzona pojedynczym znakiem spacji, z pustą linią pomiędzy,
        jednak zwyczaje mogą się tutaj różnić.
 
@@ -182,10 +182,10 @@ Najprostszym przykładem który możesz spotkać, to prywatne repozytorium z jed
 W takim środowisku możesz naśladować sposób pracy znany z Subversion czy innego scentralizowanego systemu kontroli wersji. Nadal masz wszystkie zalety takie jak commitowanie bez dostępu do centralnego serwera, oraz prostsze tworzenie gałęzi i łączenie zmian, ale przepływ pracy jest bardzo podobny; główną różnicą jest to, że łączenie zmian wykonywane jest po stronie klienta a nie serwera podczas commitu.
 Zobaczmy jak to może wyglądać, w sytuacji w której dwóch programistów rozpocznie prace z współdzielonym repozytorium. Pierwszy programista, John, klonuje repozytorium, wprowadza zmiany i zatwierdza je lokalnie. (Zamieniłem część informacji znakami `...` aby skrócić przykłady.)
 
-<!-- In this environment, you can follow a workflow similar to what you might do when using Subversion or another centralized system. You still get the advantages of things like offline committing and vastly simpler branching and merging, but the workflow can be very similar; the main difference is that merges happen client-side rather than on the server at commit time. 
+<!-- In this environment, you can follow a workflow similar to what you might do when using Subversion or another centralized system. You still get the advantages of things like offline committing and vastly simpler branching and merging, but the workflow can be very similar; the main difference is that merges happen client-side rather than on the server at commit time.
     Let’s see what it might look like when two developers start to work together with a shared repository. The first developer, John, clones the repository, makes a change, and commits locally. (I’m replacing the protocol messages with `...` in these examples to shorten them somewhat.) -->
 
-    # Komputer Johna 
+    # Komputer Johna
     $ git clone john@githost:simplegit.git
     Initialized empty Git repository in /home/john/simplegit/.git/
     ...
@@ -237,7 +237,7 @@ W tym momencie lokalne repozytorium Johna wygląda podobnie do tego z rys. 5-4.
 <!-- At this point, John’s local repository looks something like Figure 5-4. -->
 
 Insert 18333fig0504.png
-Figure 5-4. Lokalne repozytorium Johna.
+Rysunek 5-4. Lokalne repozytorium Johna.
 
 John ma już odniesienie do zmian które wypchnęła Jessica, ale musi je lokalnie połączyć ze swoimi zmianami, zanim będzie w stanie wypchnąć je:
 
@@ -253,7 +253,7 @@ John ma już odniesienie do zmian które wypchnęła Jessica, ale musi je lokaln
 <!-- The merge goes smoothly — John’s commit history now looks like Figure 5-5. -->
 
 Insert 18333fig0505.png
-Figure 5-5. Repozytorium Johna po połączeniu z origin/master.
+Rysunek 5-5. Repozytorium Johna po połączeniu z origin/master.
 
 Teraz, John może przetestować swój kod aby upewnić się że nadal działa poprawnie, oraz następnie wypchnąć swoje zmiany na serwer:
 
@@ -269,7 +269,7 @@ Ostatecznie, historia zmian u Johna wygląda tak jak na rys. 5-6.
 <!-- Finally, John’s commit history looks like Figure 5-6. -->
 
 Insert 18333fig0506.png
-Figure 5-6. Historia zmian Johna po wypchnięciu ich na serwer "origin".
+Rysunek 5-6. Historia zmian Johna po wypchnięciu ich na serwer "origin".
 
 <!-- Figure 5-6. John’s history after pushing to the origin server. -->
 
@@ -278,7 +278,7 @@ W tym samym czasie, Jessica pracowała na swojej tematycznej gałęzi. Stworzył
 <!-- In the meantime, Jessica has been working on a topic branch. She’s created a topic branch called `issue54` and done three commits on that branch. She hasn’t fetched John’s changes yet, so her commit history looks like Figure 5-7. -->
 
 Insert 18333fig0507.png
-Figure 5-7. Początkowa historia zmian u Jessici.
+Rysunek 5-7. Początkowa historia zmian u Jessici.
 
 Jessica chce zsynchronizować się ze zmianami Johna, więc pobiera ("fetch"):
 
@@ -295,7 +295,7 @@ Ta komenda pobiera zmiany Johna, które wprowadził w międzyczasie. Historia zm
 <!-- That pulls down the work John has pushed up in the meantime. Jessica’s history now looks like Figure 5-8. -->
 
 Insert 18333fig0508.png
-Figure 5-8. Historia zmian u Jessici po pobraniu zmian Johna.
+Rysunek 5-8. Historia zmian u Jessici po pobraniu zmian Johna.
 
 <!-- Figure 5-8. Jessica’s history after fetching John’s changes. -->
 
@@ -318,7 +318,7 @@ Teraz Jessica może połączyć zmiany ze swojej gałęzi z gałęzią "master",
     Switched to branch "master"
     Your branch is behind 'origin/master' by 2 commits, and can be fast-forwarded.
 
-Może ona włączyć `origin/master` lub `issue54` jako pierwszą, obie są nadrzędne więc kolejność nie ma znaczenia. Końcowa wersja plików powinna być identyczna bez względu na kolejność którą wybierze; tylko historia będzie się lekko różniła. Wybiera pierwszą do włączenia gałąź `issue54`: 
+Może ona włączyć `origin/master` lub `issue54` jako pierwszą, obie są nadrzędne więc kolejność nie ma znaczenia. Końcowa wersja plików powinna być identyczna bez względu na kolejność którą wybierze; tylko historia będzie się lekko różniła. Wybiera pierwszą do włączenia gałąź `issue54`:
 
 <!-- She can merge either `origin/master` or `issue54` first — they’re both upstream, so the order doesn’t matter. The end snapshot should be identical no matter which order she chooses; only the history will be slightly different. She chooses to merge in `issue54` first: -->
 
@@ -344,7 +344,7 @@ Wszystko połączyło się bez problemów, więc historia zmian u Jessici wyglą
 <!-- Everything merges cleanly, and Jessica’s history looks like Figure 5-9. -->
 
 Insert 18333fig0509.png
-Figure 5-9. Historia zmian u Jessici po włączeniu zmian Johna.
+Rysunek 5-9. Historia zmian u Jessici po włączeniu zmian Johna.
 
 <!-- Figure 5-9. Jessica’s history after merging John’s changes. -->
 
@@ -362,7 +362,7 @@ Każdy programista wprowadził zmiany kilkukrotnie, oraz połączył zmiany drug
 <!-- Each developer has committed a few times and merged each other’s work successfully; see Figure 5-10. -->
 
 Insert 18333fig0510.png
-Figure 5-10. Historia zmian u Jessici po wypchnięciu zmian na serwer.
+Rysunek 5-10. Historia zmian u Jessici po wypchnięciu zmian na serwer.
 
 <!-- Figure 5-10. Jessica’s history after pushing all changes back to the server. -->
 
@@ -371,21 +371,21 @@ To jest jeden z najprostszych przepływów pracy. Pracujesz przez chwilę, gener
 <!-- That is one of the simplest workflows. You work for a while, generally in a topic branch, and merge into your master branch when it’s ready to be integrated. When you want to share that work, you merge it into your own master branch, then fetch and merge `origin/master` if it has changed, and finally push to the `master` branch on the server. The general sequence is something like that shown in Figure 5-11. -->
 
 Insert 18333fig0511.png
-Figure 5-11. Sekwencja zdarzeń dla prostego przepływu zmian między programistami.
+Rysunek 5-11. Sekwencja zdarzeń dla prostego przepływu zmian między programistami.
 
 <!-- Figure 5-11. General sequence of events for a simple multiple-developer Git workflow. -->
 
 ### Prywatne zarządzane zespoły ###
 
-W tym scenariuszu, zobaczysz jak działa współpraca w większych prywatnych grupach. Nauczysz się jak pracować w środowisku w którym małe grupy współpracują ze sobą nad funkcjonalnościami, a następnie stworzone przez nich zmiany są integrowane przez inną osobą.
+W tym scenariuszu, zobaczysz jak działa współpraca w większych prywatnych grupach. Nauczysz się jak pracować w środowisku w którym małe grupy współpracują ze sobą nad funkcjonalnościami, a następnie stworzone przez nich zmiany są integrowane przez inną osobę.
 
 <!-- In this next scenario, you’ll look at contributor roles in a larger private group. You’ll learn how to work in an environment where small groups collaborate on features and then those team-based contributions are integrated by another party. -->
 
-Załóżmy że John i Jessica wspólnie pracują nad jedną funkcjonalnością, a Jessica i Josie nad drugą. W taj sytuacji, organizacja używa przepływu pracy z osobą integrującą zmiany, w której wyniki pracy poszczególnych grup są integrowane przez wyznaczone osoby, a gałąź `master` może być jedynie przez nie aktualizowana. W tym scenariuszu, cała praca wykonywana jest w osobnych gałęziach zespołów, a następnie zaciągana przez osoby integrujące.
+Załóżmy że John i Jessica wspólnie pracują nad jedną funkcjonalnością, a Jessica i Josie nad drugą. W tej sytuacji, organizacja używa przepływu pracy z osobą integrującą zmiany, w której wyniki pracy poszczególnych grup są integrowane przez wyznaczone osoby, a gałąź `master` może być jedynie przez nie aktualizowana. W tym scenariuszu, cała praca wykonywana jest w osobnych gałęziach zespołów, a następnie zaciągana przez osoby integrujące.
 
 <!-- Let’s say that John and Jessica are working together on one feature, while Jessica and Josie are working on a second. In this case, the company is using a type of integration-manager workflow where the work of the individual groups is integrated only by certain engineers, and the `master` branch of the main repo can be updated only by those engineers. In this scenario, all work is done in team-based branches and pulled together by the integrators later. -->
 
-Prześledźmy sposób pracy Jessici w czasie gdy pracuje ona nad obiema funkcjonalnościami, współpracując jednocześnie z dwoma niezależnymi programistami. Zakładając że ma już ona sklonowane repozytorium, rozpoczyna pracę nad funkcjonalnością `featureA`. Tworzy nową gałąź dla niej i wprowadza w niej zmiany:
+Prześledźmy sposób pracy Jessici w czasie gdy pracuje ona nad obiema funkcjonalnościami, współpracując jednocześnie z dwoma niezależnymi programistami. Zakładając że ma już sklonowane repozytorium, rozpoczyna pracę nad funkcjonalnością `featureA`. Tworzy nową gałąź dla niej i wprowadza w niej zmiany:
 
 <!-- Let’s follow Jessica’s workflow as she works on her two features, collaborating in parallel with two different developers in this environment. Assuming she already has her repository cloned, she decides to work on `featureA` first. She creates a new branch for the feature and does some work on it there: -->
 
@@ -433,7 +433,7 @@ Repozytorium Jessici wygląda tak jak na rys. 5-12.
 <!-- Jessica’s repository looks like Figure 5-12. -->
 
 Insert 18333fig0512.png
-Figure 5-12. Początkowa historia zmian u Jessici.
+Rysunek 5-12. Początkowa historia zmian u Jessici.
 
 <!-- Figure 5-12. Jessica’s initial commit history. -->
 
@@ -519,7 +519,7 @@ Historia zmian u Jessici wygląda teraz tak jak na rys. 5-13.
 <!-- Jessica’s commit history now looks something like Figure 5-13. -->
 
 Insert 18333fig0513.png
-Figure 5-13. Historia zmian Jessici po wprowadzeniu zmian w gałęzi.
+Rysunek 5-13. Historia zmian Jessici po wprowadzeniu zmian w gałęzi.
 
 <!-- Figure 5-13. Jessica’s history after committing on a feature branch. -->
 
@@ -528,7 +528,7 @@ Jessica, Josie i John powiadamiają osoby zajmujące się integracją, że gał�
 <!-- Jessica, Josie, and John inform the integrators that the `featureA` and `featureBee` branches on the server are ready for integration into the mainline. After they integrate these branches into the mainline, a fetch will bring down the new merge commits, making the commit history look like Figure 5-14. -->
 
 Insert 18333fig0514.png
-Figure 5-14. Historia zmian u Jessici po włączeniu jej obu gałęzi.
+Rysunek 5-14. Historia zmian u Jessici po włączeniu jej obu gałęzi.
 
 <!-- Figure 5-14. Jessica’s history after merging both her topic branches. -->
 
@@ -537,7 +537,7 @@ Duża ilość grup przechodzi na Gita ze względu na możliwość jednoczesnej w
 <!-- Many groups switch to Git because of this ability to have multiple teams working in parallel, merging the different lines of work late in the process. The ability of smaller subgroups of a team to collaborate via remote branches without necessarily having to involve or impede the entire team is a huge benefit of Git. The sequence for the workflow you saw here is something like Figure 5-15. -->
 
 Insert 18333fig0515.png
-Figure 5-15. Przebieg zdarzeń w takim przepływie.
+Rysunek 5-15. Przebieg zdarzeń w takim przepływie.
 
 <!-- Figure 5-15. Basic sequence of this managed-team workflow. -->
 
@@ -575,7 +575,7 @@ Musisz wysłać swoje zmiany do niego. Najprościej będzie wypchnąć lokalną 
 
     $ git push myfork featureA
 
-Kiedy wgrasz wprowadzone zmiany do swojego rozwidlenia projektu, powinieneś powiadomić o tym opiekuna. Jest to często nazywane `pull request`, i możesz je wygenerować poprzez stronę - GitHub ma przycisk "pull request", który automatycznie generuje wiadomość do opiekuna - lub wykonaj komendę `git request-pull` i wyślij jej wynik do opiekuna projektu samodzielnie. 
+Kiedy wgrasz wprowadzone zmiany do swojego rozwidlenia projektu, powinieneś powiadomić o tym opiekuna. Jest to często nazywane `pull request`, i możesz je wygenerować poprzez stronę - GitHub ma przycisk "pull request", który automatycznie generuje wiadomość do opiekuna - lub wykonaj komendę `git request-pull` i wyślij jej wynik do opiekuna projektu samodzielnie.
 
 <!-- When your work has been pushed up to your fork, you need to notify the maintainer. This is often called a pull request, and you can either generate it via the website — GitHub has a "pull request" button that automatically messages the maintainer — or run the `git request-pull` command and e-mail the output to the project maintainer manually. -->
 
@@ -620,7 +620,7 @@ Teraz, każdy z zestawów zmian przechowywany jest w formie silosu - podobnego d
 <!-- Now, each of your topics is contained within a silo — similar to a patch queue — that you can rewrite, rebase, and modify without the topics interfering or interdepending on each other as in Figure 5-16. -->
 
 Insert 18333fig0516.png
-Figure 5-16. Początkowa historia ze zmianami featureB.
+Rysunek 5-16. Początkowa historia ze zmianami featureB.
 
 <!-- Figure 5-16. Initial commit history with featureB work. -->
 
@@ -637,7 +637,7 @@ To przepisuje twoją historię, która wygląda teraz tak jak na rys. 5-17.
 <!-- This rewrites your history to now look like Figure 5-17. -->
 
 Insert 18333fig0517.png
-Figure 5-17. Historia zmian po pracach na featureA.
+Rysunek 5-17. Historia zmian po pracach na featureA.
 
 <!-- Figure 5-17. Commit history after featureA work. -->
 
@@ -665,7 +665,7 @@ Teraz możesz wysłać do opiekuna wiadomość, że wprowadziłeś wszystkie wym
 <!-- Now you can send the maintainer a message that you’ve made the requested changes and they can find those changes in your `featureBv2` branch (see Figure 5-18). -->
 
 Insert 18333fig0518.png
-Figure 5-18. Historia zmian po zmianach w featureBv2.
+Rysunek 5-18. Historia zmian po zmianach w featureBv2.
 
 <!-- Figure 5-18. Commit history after featureBv2 work. -->
 
@@ -725,9 +725,9 @@ Komenda `format-patch` wypisuje nazwy plików które stworzyła. Opcja `-M` mów
     --
     1.6.2.rc1.20.g8c5b.dirty
 
-Możesz oczywiście zmienić te pliki i dodać większą ilość informacji w mailu, których nie chciałeś pokazywać w komentarzu do zmiany. Jeżeli dodasz tekst miedzy linię z `--`, oraz początkiem łaty (linia z `lin/simplegit.rb`), programiści będą mogli to przeczytać; ale podczas nakładania łaty zostanie do pominięte.
+Możesz oczywiście zmienić te pliki i dodać większą ilość informacji w mailu, których nie chciałeś pokazywać w komentarzu do zmiany. Jeżeli dodasz tekst miedzy linię z `---`, oraz początkiem łaty (linia z `lib/simplegit.rb`), programiści będą mogli to przeczytać; ale podczas nakładania łaty zostanie do pominięte.
 
-<!-- You can also edit these patch files to add more information for the e-mail list that you don’t want to show up in the commit message. If you add text between the `-\-` line and the beginning of the patch (the `lib/simplegit.rb` line), then developers can read it; but applying the patch excludes it. -->
+<!-- You can also edit these patch files to add more information for the e-mail list that you don’t want to show up in the commit message. If you add text between the `-\-\-` line and the beginning of the patch (the `lib/simplegit.rb` line), then developers can read it; but applying the patch excludes it. -->
 
 Aby wysłać to na listę dyskusyjną, możesz albo wkleić zawartość plików w programie e-mail lub użyć programu uruchamianego z linii komend. Wklejanie tekstu często wprowadza problemy z zachowaniem formatowania, szczególnie przy użyciu tych "mądrzejszych" programów pocztowych, które nie zachowują poprawnie znaków nowej linii i spacji. Na szczęście Git udostępnia narzędzie, które pomoże Ci wysłać poprawnie sformatowane łaty poprzez protokół IMAP, może to być łatwiejsze dla Ciebie. Pokażę w jaki sposób wysyłać łaty przy pomocy Gmaila, którego używam; możesz znaleźć bardziej szczegółowe instrukcje dla różnych programów pocztowych na końcu wcześniej wymienionego pliku `Documentation/SubmittingPatches`, który znajduje się w kodzie źródłowym Gita.
 
@@ -777,7 +777,7 @@ Następnie, Git pokaże garść informacji podobnych tych, dla każdej łaty kt�
 
     Result: OK
 
-Od tego momentu powinieneś móc przejść do folderu Draft, zmienić pole odbiorcy wiadomości na adres listy dyskusyjnej do której wysyłasz łatę, ewentualnie dodać adres osób zainteresowanych tym tematem w kopii i wysłać. 
+Od tego momentu powinieneś móc przejść do folderu Draft, zmienić pole odbiorcy wiadomości na adres listy dyskusyjnej do której wysyłasz łatę, ewentualnie dodać adres osób zainteresowanych tym tematem w kopii i wysłać.
 
 <!-- At this point, you should be able to go to your Drafts folder, change the To field to the mailing list you’re sending the patch to, possibly CC the maintainer or person responsible for that section, and send it off. -->
 
@@ -839,7 +839,7 @@ Możesz również użyć `git apply` aby zobaczyć, czy łata nałoży się czys
     error: patch failed: ticgit.gemspec:1
     error: ticgit.gemspec: patch does not apply
 
-Jeżeli nie zostanie wygenerowany żaden komunikat, to łata nałoży się poprawnie. Ta komenda również kończy działanie z niezerowym statusem w przypadku błędu, możesz więc użyć jej w skryptach jeżeli tylko chcesz. 
+Jeżeli nie zostanie wygenerowany żaden komunikat, to łata nałoży się poprawnie. Ta komenda również kończy działanie z niezerowym statusem w przypadku błędu, możesz więc użyć jej w skryptach jeżeli tylko chcesz.
 
 <!-- If there is no output, then the patch should apply cleanly. This command also exits with a non-zero status if the check fails, so you can use it in scripts if you want. -->
 
@@ -966,7 +966,7 @@ Jeżeli napisze do Ciebie ponownie z nową gałęzią która zawiera kolejną fu
 
 <!-- If she e-mails you again later with another branch containing another great feature, you can fetch and check out because you already have the remote setup. -->
 
-Jest to bardzo pomocne w sytuacji, w której współpracujesz z jakąś osobą na stałe. Jeżeli ktoś ma tylko pojedyncze łatki które udostępnia raz na jakiś czas, to akceptowanie ich poprzez e-mail może być szybsze, niż zmuszanie wszystkich do tego aby mieli własny serwer, jak również dodawanie i usuwanie zdalnych repozytoriów aby otrzymać jedną lub dwie łatki. Jednakże, skrypty oraz usługi udostępniane mogą uczynić to prostszym - zależy od tego w taki sposób pracujesz, oraz jak pracują Twoi współpracownicy. 
+Jest to bardzo pomocne w sytuacji, w której współpracujesz z jakąś osobą na stałe. Jeżeli ktoś ma tylko pojedyncze łatki które udostępnia raz na jakiś czas, to akceptowanie ich poprzez e-mail może być szybsze, niż zmuszanie wszystkich do tego aby mieli własny serwer, jak również dodawanie i usuwanie zdalnych repozytoriów aby otrzymać jedną lub dwie łatki. Jednakże, skrypty oraz usługi udostępniane mogą uczynić to prostszym - zależy od tego w taki sposób pracujesz, oraz jak pracują Twoi współpracownicy.
 
 <!-- This is most useful if you’re working with a person consistently. If someone only has a single patch to contribute once in a while, then accepting it over e-mail may be less time consuming than requiring everyone to run their own server and having to continually add and remove remotes to get a few patches. You’re also unlikely to want to have hundreds of remotes, each for someone who contributes only a patch or two. However, scripts and hosted services may make this easier — it depends largely on how you develop and how your contributors develop. -->
 
@@ -1060,12 +1060,12 @@ Jednym z prostszych przepływów pracy jest scalenie zmian z twoją gałęzią `
 <!-- One simple workflow merges your work into your `master` branch. In this scenario, you have a `master` branch that contains basically stable code. When you have work in a topic branch that you’ve done or that someone has contributed and you’ve verified, you merge it into your master branch, delete the topic branch, and then continue the process.  If we have a repository with work in two branches named `ruby_client` and `php_client` that looks like Figure 5-19 and merge `ruby_client` first and then `php_client` next, then your history will end up looking like Figure 5-20. -->
 
 Insert 18333fig0519.png
-Figure 5-19. Historia zmian z kilkoma gałęziami tematycznymi.
+Rysunek 5-19. Historia zmian z kilkoma gałęziami tematycznymi.
 
 <!-- Figure 5-19. History with several topic branches. -->
 
 Insert 18333fig0520.png
-Figure 5-20. Po scaleniu gałęzi.
+Rysunek 5-20. Po scaleniu gałęzi.
 
 <!-- Figure 5-20. After a topic branch merge. -->
 
@@ -1078,17 +1078,17 @@ Jeżeli masz większą ilość deweloperów lub większy projekt, będziesz chci
 <!-- If you have more developers or a larger project, you’ll probably want to use at least a two-phase merge cycle. In this scenario, you have two long-running branches, `master` and `develop`, in which you determine that `master` is updated only when a very stable release is cut and all new code is integrated into the `develop` branch. You regularly push both of these branches to the public repository. Each time you have a new topic branch to merge in (Figure 5-21), you merge it into `develop` (Figure 5-22); then, when you tag a release, you fast-forward `master` to wherever the now-stable `develop` branch is (Figure 5-23). -->
 
 Insert 18333fig0521.png
-Figure 5-21. Przed scaleniem gałęzi tematycznej.
+Rysunek 5-21. Przed scaleniem gałęzi tematycznej.
 
 <!-- Figure 5-21. Before a topic branch merge. -->
 
 Insert 18333fig0522.png
-Figure 5-22. Po scaleniu gałęzi tematycznej.
+Rysunek 5-22. Po scaleniu gałęzi tematycznej.
 
 <!-- Figure 5-22. After a topic branch merge. -->
 
 Insert 18333fig0523.png
-Figure 5-23. Po utworzeniu kolejnej wersji.
+Rysunek 5-23. Po utworzeniu kolejnej wersji.
 
 <!-- Figure 5-23. After a topic branch release. -->
 
@@ -1105,7 +1105,7 @@ Projekt Gita ma cztery długodystansowe gałęzie: `master`, `next`, `pu` (propo
 <!-- The Git project has four long-running branches: `master`, `next`, and `pu` (proposed updates) for new work, and `maint` for maintenance backports. When new work is introduced by contributors, it’s collected into topic branches in the maintainer’s repository in a manner similar to what I’ve described (see Figure 5-24). At this point, the topics are evaluated to determine whether they’re safe and ready for consumption or whether they need more work. If they’re safe, they’re merged into `next`, and that branch is pushed up so everyone can try the topics integrated together. -->
 
 Insert 18333fig0524.png
-Figure 5-24. Zarządzanie złożoną serią równoczesnych zmian w gałęziach tematycznych.
+Rysunek 5-24. Zarządzanie złożoną serią równoczesnych zmian w gałęziach tematycznych.
 
 <!-- Figure 5-24. Managing a complex series of parallel contributed topic branches. -->
 
@@ -1114,7 +1114,7 @@ Jeżeli funkcjonalność potrzebuje jeszcze kolejnych zmian, są one włączane 
 <!-- If the topics still need work, they’re merged into `pu` instead. When it’s determined that they’re totally stable, the topics are re-merged into `master` and are then rebuilt from the topics that were in `next` but didn’t yet graduate to `master`. This means `master` almost always moves forward, `next` is rebased occasionally, and `pu` is rebased even more often (see Figure 5-25). -->
 
 Insert 18333fig0525.png
-Figure 5-25. Włączanie gałęzi tematycznych do gałęzi długodystansowych.
+Rysunek 5-25. Włączanie gałęzi tematycznych do gałęzi długodystansowych.
 
 <!-- Figure 5-25. Merging contributed topic branches into long-term integration branches. -->
 
@@ -1124,7 +1124,7 @@ Z chwilą, gdy gałąź tematycznie zostanie włączona do `master`, jest usuwan
 
 #### Zmiana bazy oraz wybiórcze pobieranie zmian ####
 
-Część opiekunów woli używać "rebase" lub "cherry-pick" w celu włączania zmian w gałęzi master, zamiast przy użyciu "merge", aby zachować bardziej liniową historię. Kiedy masz zmiany w gałęzi tematycznej i decydujesz się zintegrować je, przenosisz gałąź i uruchamiasz "rebase" aby nałożyć zmiany na górze swojej gałęzi master (lub `develop`, czy innej). Jeżeli to zadziała poprawnie, możesz przesunąć swoją gałąź `master` i otrzymasz praktycznie liniową historię. 
+Część opiekunów woli używać "rebase" lub "cherry-pick" w celu włączania zmian w gałęzi master, zamiast przy użyciu "merge", aby zachować bardziej liniową historię. Kiedy masz zmiany w gałęzi tematycznej i decydujesz się zintegrować je, przenosisz gałąź i uruchamiasz "rebase" aby nałożyć zmiany na górze swojej gałęzi master (lub `develop`, czy innej). Jeżeli to zadziała poprawnie, możesz przesunąć swoją gałąź `master` i otrzymasz praktycznie liniową historię.
 
 <!-- Other maintainers prefer to rebase or cherry-pick contributed work on top of their master branch, rather than merging it in, to keep a mostly linear history. When you have work in a topic branch and have determined that you want to integrate it, you move to that branch and run the rebase command to rebuild the changes on top of your current master (or `develop`, and so on) branch. If that works well, you can fast-forward your `master` branch, and you’ll end up with a linear project history. -->
 
@@ -1133,7 +1133,7 @@ Drugim sposobem na przeniesienie zmian z jednej gałęzi do drugiej jest zrobien
 <!-- The other way to move introduced work from one branch to another is to cherry-pick it. A cherry-pick in Git is like a rebase for a single commit. It takes the patch that was introduced in a commit and tries to reapply it on the branch you’re currently on. This is useful if you have a number of commits on a topic branch and you want to integrate only one of them, or if you only have one commit on a topic branch and you’d prefer to cherry-pick it rather than run rebase. For example, suppose you have a project that looks like Figure 5-26. -->
 
 Insert 18333fig0526.png
-Figure 5-26. Przykładowa historia przez wybiórczym zaciąganiem zmian.
+Rysunek 5-26. Przykładowa historia przez wybiórczym zaciąganiem zmian.
 
 <!-- Figure 5-26. Example history before a cherry pick. -->
 
@@ -1151,7 +1151,7 @@ To pobierze tylko zmiany z commita `e43a6`, ale otrzyma nową sumę SHA-1, ze wz
 <!--  This pulls the same change introduced in `e43a6`, but you get a new commit SHA-1 value, because the date applied is different. Now your history looks like Figure 5-27. -->
 
 Insert 18333fig0527.png
-Figure 5-27. Historia po wybiórczym zaciągnięciu zmiany z gałęzi tematycznej.
+Rysunek 5-27. Historia po wybiórczym zaciągnięciu zmiany z gałęzi tematycznej.
 
 <!-- Figure 5-27. History after cherry-picking a commit on a topic branch. -->
 
@@ -1161,7 +1161,7 @@ Teraz możesz usunąć swoją gałąź tematyczną, oraz zmiany których nie chc
 
 ### Tagowanie Twoich Wersji ###
 
-Kiedy zdecydowałeś, że wydasz nową wersję, najprawdopodobniej będziesz chciał stworzyć taga, tak abyś mógł odtworzyć tą wersję w każdym momencie. Możesz stworzyć nowego taga, tak jak zostało to opisane w rozdziale 2. Jeżeli zdecydujesz się na utworzenie taga jako opiekun, komenda powinna wyglądać podobnie do: 
+Kiedy zdecydowałeś, że wydasz nową wersję, najprawdopodobniej będziesz chciał stworzyć taga, tak abyś mógł odtworzyć tą wersję w każdym momencie. Możesz stworzyć nowego taga, tak jak zostało to opisane w rozdziale 2. Jeżeli zdecydujesz się na utworzenie taga jako opiekun, komenda powinna wyglądać podobnie do:
 
 <!-- When you’ve decided to cut a release, you’ll probably want to drop a tag so you can re-create that release at any point going forward. You can create a new tag as I discussed in Chapter 2. If you decide to sign the tag as the maintainer, the tagging may look something like this: -->
 
@@ -1170,7 +1170,7 @@ Kiedy zdecydowałeś, że wydasz nową wersję, najprawdopodobniej będziesz chc
     user: "Scott Chacon <schacon@gmail.com>"
     1024-bit DSA key, ID F721C45A, created 2009-02-09
 
-Jeżeli podpisujesz swoje tagi, możesz mieć problem z dystrybucją swojego publicznego klucza PGP, który został użyty. Można rozwiązać ten problem poprzez dodanie obiektu binarnego (ang. blob) w repozytorium, a następnie stworzenie taga kierującego dokładnie na jego zawartość. Aby to zrobić, musisz wybrać klucz za pomocą komendy `gpg --list-keys`: 
+Jeżeli podpisujesz swoje tagi, możesz mieć problem z dystrybucją swojego publicznego klucza PGP, który został użyty. Można rozwiązać ten problem poprzez dodanie obiektu binarnego (ang. blob) w repozytorium, a następnie stworzenie taga kierującego dokładnie na jego zawartość. Aby to zrobić, musisz wybrać klucz za pomocą komendy `gpg --list-keys`:
 
 <!-- If you do sign your tags, you may have the problem of distributing the public PGP key used to sign your tags. The maintainer of the Git project has solved this issue by including their public key as a blob in the repository and then adding a tag that points directly to that content. To do this, you can figure out which key you want by running `gpg -\-list-keys`: -->
 
@@ -1220,7 +1220,7 @@ W ten sposób, możesz udostępnić konkretną wersję lub kompilację pod nazw�
 
 <!-- This way, you can export a snapshot or build and name it something understandable to people. In fact, if you build Git from source code cloned from the Git repository, `git -\-version` gives you something that looks like this. If you’re describing a commit that you have directly tagged, it gives you the tag name. -->
 
-Komenda `git describe` faworyzuje etykiety stworzone przy użyciu opcji `-a` lub `-s`, więc etykiety dotyczące konkretnych wersji powinny być tworzone w ten sposób, jeżeli używasz `git describe` w celu zapewnienia poprawnych nazw commitów. Możesz również używać tej nazwy do komend "checkout" lub "show", choć polegają one na skróconej wartości SHA-1, mogą więc nie być wiecznie poprawne. Na przykład, projekt jądra Linuksa przeszedł ostatnio z 8 na 10 znaków aby zapewnić unikalność sum SHA-1, więc poprzednie nazwy wygenerowane za pomocą `git describe` zostały unieważnione. 
+Komenda `git describe` faworyzuje etykiety stworzone przy użyciu opcji `-a` lub `-s`, więc etykiety dotyczące konkretnych wersji powinny być tworzone w ten sposób, jeżeli używasz `git describe` w celu zapewnienia poprawnych nazw commitów. Możesz również używać tej nazwy do komend "checkout" lub "show", choć polegają one na skróconej wartości SHA-1, mogą więc nie być wiecznie poprawne. Na przykład, projekt jądra Linuksa przeszedł ostatnio z 8 na 10 znaków aby zapewnić unikalność sum SHA-1, więc poprzednie nazwy wygenerowane za pomocą `git describe` zostały unieważnione.
 
 <!-- The `git describe` command favors annotated tags (tags created with the `-a` or `-s` flag), so release tags should be created this way if you’re using `git describe`, to ensure the commit is named properly when described. You can also use this string as the target of a checkout or show command, although it relies on the abbreviated SHA-1 value at the end, so it may not be valid forever. For instance, the Linux kernel recently jumped from 8 to 10 characters to ensure SHA-1 object uniqueness, so older `git describe` output names were invalidated. -->
 

@@ -82,13 +82,13 @@ Git은 자동으로 브랜치와 HEAD가 지난 몇 달 동안에 가리켰었�
 `git reflog`를 실행하면 Reflog를 볼 수 있다:
 
 	$ git reflog
-	734713b... HEAD@{0}: commit: fixed refs handling, added gc auto, updated
-	d921970... HEAD@{1}: merge phedders/rdocs: Merge made by recursive.
-	1c002dd... HEAD@{2}: commit: added some blame and merge stuff
-	1c36188... HEAD@{3}: rebase -i (squash): updating HEAD
-	95df984... HEAD@{4}: commit: # This is a combination of two commits.
-	1c36188... HEAD@{5}: rebase -i (squash): updating HEAD
-	7e05da5... HEAD@{6}: rebase -i (pick): updating HEAD
+	734713b HEAD@{0}: commit: fixed refs handling, added gc auto, updated
+	d921970 HEAD@{1}: merge phedders/rdocs: Merge made by recursive.
+	1c002dd HEAD@{2}: commit: added some blame and merge stuff
+	1c36188 HEAD@{3}: rebase -i (squash): updating HEAD
+	95df984 HEAD@{4}: commit: # This is a combination of two commits.
+	1c36188 HEAD@{5}: rebase -i (squash): updating HEAD
+	7e05da5 HEAD@{6}: rebase -i (pick): updating HEAD
 
 Git은 브랜치가 가리키는 것이 변경될 때마다 그 정보를 임시 영역에 저장한다. 그래서 예전에 뭘 가리켰었는지 확인할 수 있다. `@{n}` 규칙을 사용하면 아래와 같이 HEAD가 5번 전에 가리켰던 것을 알 수 있다:
 
@@ -105,7 +105,7 @@ Git은 브랜치가 가리키는 것이 변경될 때마다 그 정보를 임시
 	$ git log -g master
 	commit 734713bc047d87bf7eac9674765ae793478c50d3
 	Reflog: master@{0} (Scott Chacon <schacon@gmail.com>)
-	Reflog message: commit: fixed refs handling, added gc auto, updated 
+	Reflog message: commit: fixed refs handling, added gc auto, updated
 	Author: Scott Chacon <schacon@gmail.com>
 	Date:   Fri Jan 2 18:32:33 2009 -0800
 
@@ -128,10 +128,10 @@ reflog의 일은 모두 로컬의 일이기 때문에 내 reflog가 동료의 �
 	$ git log --pretty=format:'%h %s' --graph
 	* 734713b fixed refs handling, added gc auto, updated tests
 	*   d921970 Merge commit 'phedders/rdocs'
-	|\  
+	|\
 	| * 35cfb2b Some rdoc changes
 	* | 1c002dd added some blame and merge stuff
-	|/  
+	|/
 	* 1c36188 ignore *.gem
 	* 9b29157 add open3_detach to gemspec file list
 
@@ -190,7 +190,7 @@ reflog의 일은 모두 로컬의 일이기 때문에 내 reflog가 동료의 �
 범위를 표현하는 문법으로 Double Dot(..)을 많이 쓴다. Double Dot은 한쪽에는 있고 다른 쪽에는 없는 커밋이 무엇인지 Git에게 물어보는 것이다. 예들 들어 그림 6-1과 같은 커밋 히스토리가 있다고 가정하자.
 
 Insert 18333fig0601.png
-그림 6-1 범위를 설명하는 데 사용할 예제
+그림 6-1. 범위를 설명하는 데 사용할 예제
 
 experiment 브랜치의 커밋들 중에서 아직 master 브랜치에 Merge하지 않은 것만 보고 싶으면 `master..experiment`라고 사용한다. 이 표현은 "master에는 없지만, experiment에는 있는 커밋"을 의미한다. 여기에서는 설명을 쉽게 하고자 실제 조회 결과가 아니라 그림 6-1의 문자를 사용한다:
 
@@ -223,7 +223,7 @@ Double Dot으로는 세 개 이상의 레퍼런스에 사용할 수 없지만 �
 	$ git log refA refB ^refC
 	$ git log refA refB --not refC
 
-이 조건을 잘 응용하면 작업 중인 브랜치와 다른 브랜치을 매우 상세하게 비교할 수 있다.
+이 조건을 잘 응용하면 작업 중인 브랜치와 다른 브랜치를 매우 상세하게 비교할 수 있다.
 
 #### Triple Dot ####
 
@@ -260,7 +260,7 @@ Git은 대화형 명령어도 제공해서 좀 더 쉽게 사용할 수 있다. 
 	*** Commands ***
 	  1: status     2: update      3: revert     4: add untracked
 	  5: patch      6: diff        7: quit       8: help
-	What now> 
+	What now>
 
 이 명령어는 Staging Area의 현재 상태가 어떻고 할 수 있는 일이 무엇인지 보여준다. 기본적으로 `git status` 명령이 보여주는 것과 같지만 좀 더 간결하고 정돈돼 있다. 왼쪽에는 Staged 상태인 파일들을 보여주고 오른쪽에는 Unstaged인 파일들을 보여준다.
 
@@ -288,7 +288,7 @@ TODO와 index.html 파일을 Stage하려면 아래와 같이 입력한다:
 
 `*` 표시가 붙은 파일은 stage하도록 선택한 것이다. 선택하고 `Update>>` 프롬프트에 아무것도 입력하지 않고 엔터를 치면 Git은 선택한 파일을 Staging Area로 추가한다:
 
-	Update>> 
+	Update>>
 	updated 2 paths
 
 	*** Commands ***
@@ -300,7 +300,7 @@ TODO와 index.html 파일을 Stage하려면 아래와 같이 입력한다:
 	  2:        +1/-1      nothing index.html
 	  3:    unchanged        +5/-1 lib/simplegit.rb
 
-이제 TODO와 index.html 파일은 Stage했고 simplegit.rb 파일만 아직 Unstaged 상태로 남아 있다. 이제 TODO 파일을 다시 Unstage하고 싶으면 `3`이나 `r`을(Revert) 입력한다: 
+이제 TODO와 index.html 파일은 Stage했고 simplegit.rb 파일만 아직 Unstaged 상태로 남아 있다. 이제 TODO 파일을 다시 Unstage하고 싶으면 `3`이나 `r`을(Revert) 입력한다:
 
 	*** Commands ***
 	  1: status     2: update      3: revert     4: add untracked
@@ -370,7 +370,7 @@ Staged 파일의 변경내용을 보려면 `6`이나 `d`를(diff) 입력한다. 
 	   end
 
 	   def blame(path)
-	Stage this hunk [y,n,a,d,/,j,J,g,e,?]? 
+	Stage this hunk [y,n,a,d,/,j,J,g,e,?]?
 
 여기에서 `?`를 입력하면 선택 가능한 명령어를 설명해준다:
 
@@ -409,7 +409,7 @@ Stash 명령을 사용하면 워킹 디렉토리에서 수정한 파일만 저�
 
 ### 하던 일을 Stash하기 ###
 
-예제 프로젝트를 하나 살펴보자. 파일을 두 개 수정하고 그 중 하나는 Staging Area에 추가한다. 그리고 `git status` 명령을 실행하면 아래와 같은 결과를 볼 수 있다: 
+예제 프로젝트를 하나 살펴보자. 파일을 두 개 수정하고 그 중 하나는 Staging Area에 추가한다. 그리고 `git status` 명령을 실행하면 아래와 같은 결과를 볼 수 있다:
 
 	$ git status
 	# On branch master
@@ -436,14 +436,14 @@ Stash 명령을 사용하면 워킹 디렉토리에서 수정한 파일만 저�
 
 	$ git status
 	# On branch master
-	nothing to commit (working directory clean)
+	nothing to commit, working directory clean
 
 이제 아무 브랜치나 골라서 바꿀 수 있다. 수정하던 것은 스택에 저장했다. 아래와 같이 `git stash list`를 사용하여 저장한 Stash를 확인한다:
 
 	$ git stash list
 	stash@{0}: WIP on master: 049d078 added the index file
-	stash@{1}: WIP on master: c264051... Revert "added file_size"
-	stash@{2}: WIP on master: 21d80a5... added number to log
+	stash@{1}: WIP on master: c264051 Revert "added file_size"
+	stash@{2}: WIP on master: 21d80a5 added number to log
 
 Stash 두 개는 원래 있었던 것이다. 그래서 현재 총 세 개의 Stash를 사용할 수 있다. 이제 `git stash apply`를 사용하여 Stash를 적용할 수 있다. `git stash` 명령을 실행하면 이 명령에 대한 도움말을 보여주기 때문에 편리하다. 다른 Stash를 고르고 싶으면 Stash 이름을 입력해야 한다. 이름이 없으면 Git은 가장 최근의 Stash를 적용한다:
 
@@ -456,7 +456,7 @@ Stash 두 개는 원래 있었던 것이다. 그래서 현재 총 세 개의 Sta
 	#      modified:   lib/simplegit.rb
 	#
 
-Git은 Stash에 저장할 때 수정하던 파일을 복원해준다. 복원할 때의 워킹 디렉토리는 Stash할 때의 그 브랜치이고 워킹 디렉토리도 깨끗한 상태였다. 하지만, 꼭 깨끗한 워킹 디렉토리나 Stash할 때와 같은 브랜치에 적용해야 하는 것은 아니다. 어떤 브랜치에서 Stash하고 다른 브랜치로 옮기고서 거기에 Stash를 복원할 수 있다. 그리고 꼭 워킹 디렉토리가 깨끗한 상태일 필요도 없다. 워킹 디렉토리에 수정하고 커밋하지 않은 파일들이 있을 때에도 Stash를 적용할 수 있다. 만약 충돌이 나면 알려준다. 
+Git은 Stash에 저장할 때 수정하던 파일을 복원해준다. 복원할 때의 워킹 디렉토리는 Stash할 때의 그 브랜치이고 워킹 디렉토리도 깨끗한 상태였다. 하지만, 꼭 깨끗한 워킹 디렉토리나 Stash할 때와 같은 브랜치에 적용해야 하는 것은 아니다. 어떤 브랜치에서 Stash하고 다른 브랜치로 옮기고서 거기에 Stash를 복원할 수 있다. 그리고 꼭 워킹 디렉토리가 깨끗한 상태일 필요도 없다. 워킹 디렉토리에 수정하고 커밋하지 않은 파일들이 있을 때에도 Stash를 적용할 수 있다. 만약 충돌이 나면 알려준다.
 
 Git은 Stash를 적용할 때 Staged 상태였던 파일을 자동으로 다시 Staged 상태로 만들어 주지 않는다. 그래서 `git stash apply` 명령을 실행할 때 `--index` 옵션을 주어야 Staged 상태까지 복원한다. 그럼 원래 작업하던 상태로 돌아올 수 있다:
 
@@ -477,8 +477,8 @@ Git은 Stash를 적용할 때 Staged 상태였던 파일을 자동으로 다시 
 
 	$ git stash list
 	stash@{0}: WIP on master: 049d078 added the index file
-	stash@{1}: WIP on master: c264051... Revert "added file_size"
-	stash@{2}: WIP on master: 21d80a5... added number to log
+	stash@{1}: WIP on master: c264051 Revert "added file_size"
+	stash@{2}: WIP on master: 21d80a5 added number to log
 	$ git stash drop stash@{0}
 	Dropped stash@{0} (364e91f3f268f0900bc3ee613f9f733e82aaed43)
 
@@ -488,18 +488,18 @@ Git은 Stash를 적용할 때 Staged 상태였던 파일을 자동으로 다시 
 
 Stash를 적용하고 나서 아차 싶을 때에는 다시 되돌려 놓아야 한다. Git은 `stash unapply` 같은 명령을 제공하지는 않는다. 하지만, Stash를 이용해서 패치를 만들고 그것을 거꾸로 적용할 수 있다:
 
-    $ git stash show -p stash@{0} | git apply -R
+	$ git stash show -p stash@{0} | git apply -R
 
 Stash를 명시하지 않으면 Git은 가장 최근의 Stash를 사용한다:
 
-    $ git stash show -p | git apply -R
+	$ git stash show -p | git apply -R
 
 `stash-unapply`라는 alias를 만들고 편리하게 할 수도 있다:
 
-    $ git config --global alias.stash-unapply '!git stash show -p | git apply -R'
-    $ git stash
-    $ #... work work work
-    $ git stash-unapply
+	$ git config --global alias.stash-unapply '!git stash show -p | git apply -R'
+	$ git stash apply
+	$ #... work work work
+	$ git stash-unapply
 
 ### Stash를 적용한 브랜치 만들기 ###
 
@@ -562,12 +562,19 @@ Git으로 일하다 보면 어떤 이유로든 커밋 히스토리를 수정해�
 	#
 	# Commands:
 	#  p, pick = use commit
+	#  r, reword = use commit, but edit the commit message
 	#  e, edit = use commit, but stop for amending
 	#  s, squash = use commit, but meld into previous commit
+	#  f, fixup = like "squash", but discard this commit's log message
+	#  x, exec = run command (the rest of the line) using shell
+	#
+	# These lines can be re-ordered; they are executed from top to bottom.
 	#
 	# If you remove a line here THAT COMMIT WILL BE LOST.
+	#
 	# However, if you remove everything, the rebase will be aborted.
 	#
+	# Note that empty commits are commented out
 
 이 커밋은 모두 `log` 명령과는 정반대의 순서로 나열된다. `log` 명령을 실행하면 아래와 같은 결과를 볼 수 있다:
 
@@ -585,6 +592,10 @@ Git으로 일하다 보면 어떤 이유로든 커밋 히스토리를 수정해�
 	pick a5f4a0d added cat-file
 
 저장하고 편집기를 종료하면 Git은 목록에 있는 커밋 중에서 가장 오래된 커밋으로 이동하고, 아래와 같은 메시지를 보여주고, 명령 프롬프트를 보여준다:
+
+<!-- This is actually weird, as the SHA-1 of 7482e0d is not present in the list, 
+nor is the commit message. Please review 
+-->
 
 	$ git rebase -i HEAD~3
 	Stopped at 7482e0d... updated the gemspec to hopefully work better
@@ -628,12 +639,19 @@ Git으로 일하다 보면 어떤 이유로든 커밋 히스토리를 수정해�
 	#
 	# Commands:
 	#  p, pick = use commit
+	#  r, reword = use commit, but edit the commit message
 	#  e, edit = use commit, but stop for amending
 	#  s, squash = use commit, but meld into previous commit
+	#  f, fixup = like "squash", but discard this commit's log message
+	#  x, exec = run command (the rest of the line) using shell
+	#
+	# These lines can be re-ordered; they are executed from top to bottom.
 	#
 	# If you remove a line here THAT COMMIT WILL BE LOST.
+	#
 	# However, if you remove everything, the rebase will be aborted.
 	#
+	# Note that empty commits are commented out
 
 "pick"이나 "edit"말고 "squash"를 입력하면 Git은 해당 커밋과 바로 이전 커밋을 합칠 것이고 커밋 메시지도 Merge한다. 그래서 3개의 커밋을 모두 합치려면 스크립트를 아래와 같이 수정한다:
 
@@ -665,7 +683,7 @@ Git으로 일하다 보면 어떤 이유로든 커밋 히스토리를 수정해�
 	edit 310154e updated README formatting and added blame
 	pick a5f4a0d added cat-file
 
-저장해서 명령 프롬프트로 넘어가면 그 커밋을 Reset하고 그 내용을 다시 두 개로 나눠서 커밋하면 된다. 저장하고 편집기를 종료하면 Git은 제일 오래된 커밋의 부모로 이동하고서 `f7f3f6d`과 `310154e`을 처리하고 콘솔 프롬프트를 보여준다. 여기서 커밋을 Reset하는 `git reset HEAD^`라는 명령으로 커밋을 Reset한다. 그러면 수정했던 파일은 Unstaged 상태가 된다. 그다음에 파일을 Stage하고 커밋하는 일을 원하는 만큼 반복하고 나서 `git rebase --continue`라는 명령을 실행하면 Rebase 작업이 모두 끝난다:
+위와 같이 수정하고 나서 저장하고 편집기를 종료하면 Git은 제일 오래된 커밋의 부모로 이동하고서 `f7f3f6d`과 `310154e`을 처리하고 콘솔 프롬프트를 보여준다. 여기서 커밋을 해제하는 `git reset HEAD^`라는 명령으로 커밋을 해제한다. 그러면 수정했던 파일은 Unstaged 상태가 된다. 그다음에 파일들을 Stage한 후 커밋하는 일을 원하는 만큼 반복하고 나서 `git rebase --continue`라는 명령을 실행하면 남은 Rebase작업이 끝난다:
 
 	$ git reset HEAD^
 	$ git add README
@@ -696,7 +714,7 @@ Git으로 일하다 보면 어떤 이유로든 커밋 히스토리를 수정해�
 	Rewrite 6b9b3cf04e7c5686a9cb838c3f36a8cb6a0fc2bd (21/21)
 	Ref 'refs/heads/master' was rewritten
 
-`--tree-filter` 옵션은 프로젝트를 Checkout한 후에 각 커밋에 명시한 명령어를 실행시키고 그 결과를 다시 커밋한다. 이 예제에서는 각 스냅샷에 passwords.txt라는 파일이 있으면 그 파일을 삭제한다. 실수로 편집기의 백업파일을 커밋했으면 `git filter-branch --tree-filter 'rm -f *~' HEAD`라고 실행해서 삭제할 수 있다.
+`--tree-filter` 옵션은 프로젝트를 Checkout한 후에 각 커밋에 명시한 명령어를 실행시키고 그 결과를 다시 커밋한다. 이 예제에서는 각 스냅샷에 passwords.txt라는 파일이 있으면 그 파일을 삭제한다. 실수로 편집기의 백업파일을 커밋했으면 `git filter-branch --tree-filter "find * -type f -name '*~' -delete" HEAD`라고 실행해서 삭제할 수 있다.
 
 이 명령은 모든 파일과 커밋을 정리하고 브랜치 포인터를 다시 복원해준다. 테스팅 브랜치에서 사용할 명령을 점검하고 나서 master 브랜치를 정리한다. 그리고 `filter-branch` 명령에 `--all` 옵션을 추가하면 모든 브랜치에 적용된다.
 
@@ -734,7 +752,7 @@ Git은 굉장히 유연해서 어떤 프로젝트에나 사용할 수 있다. �
 
 버그를 찾을 때 먼저 그 코드가 왜, 언제 추가했는지 알고 싶을 것이다. 이때는 파일 어노테이션을 활용한다. 한줄한줄 마지막으로 커밋한 사람이 누구인지, 언제 마지막으로 커밋했는지 볼 수 있다. 어떤 메소드에 버그가 있으면 `git blame` 명령으로 그 메소드의 각 줄을 누가 언제 마지막으로 고쳤는지 찾아낼 수 있다:
 
-	$ git blame -L 12,22 simplegit.rb 
+	$ git blame -L 12,22 simplegit.rb
 	^4832fe2 (Scott Chacon  2008-03-15 10:31:28 -0700 12)  def show(tree = 'master')
 	^4832fe2 (Scott Chacon  2008-03-15 10:31:28 -0700 13)   command("git show #{tree}")
 	^4832fe2 (Scott Chacon  2008-03-15 10:31:28 -0700 14)  end
@@ -751,8 +769,8 @@ Git은 굉장히 유연해서 어떤 프로젝트에나 사용할 수 있다. �
 
 Git은 파일 이름을 변경한 이력을 별도로 기록해두지 않는다. 하지만, 원래 이 정보들은 각 스냅샷에 저장되고 이 정보를 이용하여 변경 이력을 만들어 낼 수 있다. 그러니까 파일에 생긴 변화는 무엇이든지 알아낼 수 있다. Git은 파일 어노테이션을 분석하여 코드들이 원래 어떤 파일에서 커밋된 것인지 찾아준다. 예를 들어보자. `GITServerHandler.m`을 여러 개의 파일로 리팩토링했는데 그 중 한 파일이 `GITPackUpload.m`이라는 파일이라고 하자. `-C` 옵션으로 `GITPackUpload.m` 파일을 추적해보면 각 코드가 원래 어떤 파일로 커밋된 것인지 알 수 있다:
 
-	$ git blame -C -L 141,153 GITPackUpload.m 
-	f344f58d GITServerHandler.m (Scott 2009-01-04 141) 
+	$ git blame -C -L 141,153 GITPackUpload.m
+	f344f58d GITServerHandler.m (Scott 2009-01-04 141)
 	f344f58d GITServerHandler.m (Scott 2009-01-04 142) - (void) gatherObjectShasFromC
 	f344f58d GITServerHandler.m (Scott 2009-01-04 143) {
 	70befddd GITServerHandler.m (Scott 2009-03-22 144)         //NSLog(@"GATHER COMMI
@@ -849,7 +867,7 @@ Git의 서브모듈은 이런 문제를 해결해준다. 서브모듈은 Git 저
 
 `.gitmodules` 파일을 살펴보자. 이 것은 로컬 디렉토리와 프로젝트 URL의 매핑 정보가 저장된 설정파일이다:
 
-	$ cat .gitmodules 
+	$ cat .gitmodules
 	[submodule "rack"]
 	      path = rack
 	      url = git://github.com/chneukirchen/rack.git
@@ -987,9 +1005,9 @@ Merge해서 서브모듈의 HEAD 값이 변경됐다. 슈퍼프로젝트가 아�
 
 ### 슈퍼프로젝트 ###
 
-프로젝트 규모가 크면 CVS나 Subversion에서는 모듈 프로젝트을 간단히 하위 디렉토리로 만들었다. 가끔 Git에서도 이런 Workflow을 사용하려는 개발자들이 있다.
+프로젝트 규모가 크면 CVS나 Subversion에서는 모듈 프로젝트를 간단히 하위 디렉토리로 만들었다. 가끔 Git에서도 이런 Workflow을 사용하려는 개발자들이 있다.
 
-Git에서는 각 하위 디렉토리를 별도의 Git 저장소로 만들어야 한다. 그리고 그 저장소을 포함하는 상위 저장소를 만든다. 슈퍼프로젝트의 태그와 브랜치를 이용해서 각 프로젝트의 관계를 구체적으로 정의할 수 있다는 것은 Git만의 장점이다.
+Git에서는 각 하위 디렉토리를 별도의 Git 저장소로 만들어야 한다. 그리고 그 저장소를 포함하는 상위 저장소를 만든다. 슈퍼프로젝트의 태그와 브랜치를 이용해서 각 프로젝트의 관계를 구체적으로 정의할 수 있다는 것은 Git만의 장점이다.
 
 ### 서브모듈 사용할 때 주의할 점들 ###
 
